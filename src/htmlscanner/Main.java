@@ -1,11 +1,8 @@
 package htmlscanner;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -36,16 +33,7 @@ public class Main {
 				// retornar identificador
 				System.out.println(String.format("==> en pos %d hasta %d, (ID, %s)", automaton.initialPos,automaton.pos-2, automaton.getTempString()));
 				
-				//vaciar temporal
-				automaton.temp.clear();
-				// restart pos inicial temporal
-				automaton.initialPos = -1;
-
-				// volver a "initial", ejecucion epsilon
-				automaton.state= "initial";
-				
-				// volver el puntero 1 para atras
-				automaton.pos--;
+				automaton.execEpsilon();
 			}
 		});
 	}
@@ -55,15 +43,7 @@ public class Main {
 				// retornar identificador
 				System.out.println(String.format("==> en pos %d hasta %d, (INT, %s)", automaton.initialPos, automaton.pos-2, automaton.getTempString()));
 				
-				//vaciar temporal
-				automaton.temp.clear();
-				automaton.initialPos = -1;
-
-				// volver a "initial", ejecucion epsilon
-				automaton.state= "initial";
-				
-				// volver el puntero 1 para atras
-				automaton.pos--;
+				automaton.execEpsilon();
 			}
 		});
 	}
@@ -150,6 +130,18 @@ public class Main {
 		public String toString() {
 			return "Automaton [pos=" + pos + ", index='" + index + "', state="
 					+ state.toUpperCase() + ", temp=\"" + temp + "\"]";
+		}
+		public void execEpsilon(){
+			//vaciar temporal
+			temp.clear();
+			// restart pos inicial temporal
+			initialPos = -1;
+
+			// volver a "initial", ejecucion epsilon
+			state= "initial";
+			
+			// volver el puntero 1 para atras
+			pos--;
 		}
 		
 	}

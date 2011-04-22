@@ -1,4 +1,12 @@
 transitions:
+  initial:
+    a: ident
+    b: ident
+    c: ident
+    "0": int
+    "1": int
+    " ": sep
+    $: end
   ident:
     a: ident
     b: ident
@@ -15,17 +23,21 @@ transitions:
     "0": int
     "1": int
     " ": int_final
-    .: int_final
+    .: real_aux
     $: int_final
-  initial:
-    a: ident
-    b: ident
-    c: ident
-    "0": int
-    "1": int
-    " ": sep
-    $: end
-
+  real_aux:
+    "0": real
+    "1": real
+  real:
+    "0": real
+    "1": real
+    a: real_final
+    b: real_final
+    c: real_final
+    " ": real_final
+    .: real_final
+    $: real_final
+    
 semanticActions:
   ident_final:
     token_id: "ID"
@@ -35,6 +47,10 @@ semanticActions:
     token_id: "INT"
     have_value: true
     reset: true
+  real_final:
+    token_id: "REAL"
+    have_value: true
+    reset: true
   sep:
     token_id: "SEP"
     have_value: false
@@ -42,4 +58,8 @@ semanticActions:
   ident:
     save_value: true
   int:
+    save_value: true
+  real:
+    save_value: true
+  real_aux:
     save_value: true

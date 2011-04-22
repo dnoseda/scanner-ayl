@@ -32,6 +32,7 @@ public class AutomatonTests extends TestCase {
 				new Token("ID","bbb"), new Token("SEP",null),
 				new Token("ID","c001"));
 		assertTrue(String.format("tokens esperado: %s\ntokens resultado: %s",tokens,result.tokens),isEqual(result.getTokens(),tokens));
+		System.out.println(result.tokens);
 	}
 	
 	public void testInt() throws Exception {
@@ -45,6 +46,7 @@ public class AutomatonTests extends TestCase {
 				new Token("INT","00"), new Token("SEP",null),
 				new Token("INT","101"));
 		assertTrue(String.format("tokens esperado: %s\ntokens resultado: %s",tokens,result.tokens),isEqual(result.getTokens(),tokens));
+		System.out.println(result.tokens);
 	}
 	
 	public void testReal() throws Exception {
@@ -58,6 +60,7 @@ public class AutomatonTests extends TestCase {
 				new Token("REAL","0.01"), new Token("SEP",null),
 				new Token("INT","101"));
 		assertTrue(String.format("tokens esperado: %s\ntokens resultado: %s",tokens,result.tokens),isEqual(result.getTokens(),tokens));
+		System.out.println(result.tokens);
 	}
 
 	public static boolean isEqual(List<Token> tokens, List<Token> tokens2) {

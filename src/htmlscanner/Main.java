@@ -14,9 +14,9 @@ public class Main {
 		for (Object entObject : map.entrySet()) {
 			Entry entry = (Entry) entObject;
 			//System.out.println(String.format(
-					"key (%s): '%s' value (%s): '%s' ", entry.getKey()
-							.getClass(), entry.getKey(), entry.getValue()
-							.getClass(), entry.getValue()));
+//					"key (%s): '%s' value (%s): '%s' ", entry.getKey()
+//							.getClass(), entry.getKey(), entry.getValue()
+//							.getClass(), entry.getValue()));
 		}
 	}
 

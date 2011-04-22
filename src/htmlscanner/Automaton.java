@@ -86,7 +86,7 @@ public class Automaton {
 				}
 				String nextState = transitions.get(state).get(index);
 				//System.out.println(String.format("Delta(%S, '%c') = %S",
-						state, index, nextState));
+//						state, index, nextState));
 				if (nextState == null) {
 					errors.add(String.format("ERROR pos %d", pos));
 				} else {
@@ -112,13 +112,13 @@ public class Automaton {
 							tokens.add(token);
 							if (haveValue) {
 								//System.out.println(String.format(
-										"==> en pos %d hasta %d, (%s, %s)",
-										initialPos, pos - 2,
-										token.getCode(), token.getValue()));
+//										"==> en pos %d hasta %d, (%s, %s)",
+//										initialPos, pos - 2,
+//										token.getCode(), token.getValue()));
 							} else {
 								//System.out.println(String.format(
-										"==> en pos %d, (%s, null)",
-										pos - 1, token.getCode()));
+//										"==> en pos %d, (%s, null)",
+//										pos - 1, token.getCode()));
 							}
 							if (reset) {
 								//System.out.println("reset");

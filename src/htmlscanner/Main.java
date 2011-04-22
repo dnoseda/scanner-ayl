@@ -151,9 +151,12 @@ public class Main {
 	public static void main(String[] args) {
 		init();
 		String input = "ab1 10. bb0b. 10.11 100101 a";
-		scan(input);
+		System.out.println("tokens:");
+		for(Token t : scan(input)){
+			System.out.println(t);
+		}
 	}
-	private static void scan(String input) {
+	private static List<Token> scan(String input) {
 		Automaton au = new Automaton();
 		
 		try {
@@ -180,5 +183,6 @@ public class Main {
 			System.err.println("ERROR:     estado automata:\n" + au);
 			e.printStackTrace();
 		}
+		return au.tokens;
 	}
 }

@@ -23,4 +23,8 @@ public class ScanResult {
 	public void setTokens(List<Token> tokens) {
 		this.tokens = tokens;
 	}
+	
+	public String toString() {
+		return String.format("Tokens %s\nErrores: %s", tokens,errors);
+	}
 }

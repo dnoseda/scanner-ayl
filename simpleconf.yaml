@@ -1,0 +1,27 @@
+transitions:
+  ident: !com.google.common.collect.RegularImmutableMap
+    a: ident
+    b: ident
+    c: ident
+    "0": ident
+    "1": ident
+    " ": ident_final
+    .: ident_final
+    $: ident_final
+  int: !com.google.common.collect.RegularImmutableMap
+    a: int_final
+    b: int_final
+    c: int_final
+    "0": int
+    "1": int
+    " ": int_final
+    .: int_final
+    $: int_final
+  initial: !com.google.common.collect.RegularImmutableMap
+    a: ident
+    b: ident
+    c: ident
+    "0": int
+    "1": int
+    " ": esp
+    $: end

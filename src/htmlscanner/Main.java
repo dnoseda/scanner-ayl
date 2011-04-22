@@ -3,6 +3,8 @@ package htmlscanner;
 import java.util.List;
 import java.util.Map;
 
+import org.ho.yaml.Yaml;
+
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -155,6 +157,9 @@ public class Main {
 		for(Token t : scan(input)){
 			System.out.println(t);
 		}
+		
+		System.out.println();
+		System.out.println(Yaml.dump(transitions));
 	}
 	private static List<Token> scan(String input) {
 		Automaton au = new Automaton();

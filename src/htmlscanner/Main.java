@@ -32,7 +32,7 @@ public class Main {
 			public void doAction(Automaton automaton) {
 				// retornar identificador
 				System.out.println(String.format("==> en pos %d hasta %d, (ID, %s)", automaton.initialPos,automaton.pos-2, automaton.getTempString()));
-				
+				automaton.tokens.add(new Token("ID",automaton.getTempString()));
 				automaton.execEpsilon();
 			}
 		});
@@ -42,7 +42,7 @@ public class Main {
 			public void doAction(Automaton automaton) {
 				// retornar identificador
 				System.out.println(String.format("==> en pos %d hasta %d, (INT, %s)", automaton.initialPos, automaton.pos-2, automaton.getTempString()));
-				
+				automaton.tokens.add(new Token("INT",automaton.getTempString()));
 				automaton.execEpsilon();
 			}
 		});
@@ -96,6 +96,7 @@ public class Main {
 			public void doAction(Automaton automaton) {
 				//entregar separador
 				System.out.println(String.format("==> en pos %d, (SEP, )", automaton.pos-1));
+				automaton.tokens.add(new Token("SEP",null));
 				
 				// ir a inicial
 				automaton.state = "initial";
@@ -144,10 +145,15 @@ public class Main {
 			pos--;
 		}
 		
+		List<Token> tokens = Lists.newArrayList(); 
+		
 	}
 	public static void main(String[] args) {
 		init();
 		String input = "ab1 10. bb0b. 10.11 100101 a";
+		scan(input);
+	}
+	private static void scan(String input) {
 		Automaton au = new Automaton();
 		
 		try {

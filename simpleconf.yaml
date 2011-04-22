@@ -23,7 +23,7 @@ transitions:
     c: ident
     "0": int
     "1": int
-    " ": esp
+    " ": sep
     $: end
 
 semanticActions:
@@ -40,4 +40,6 @@ semanticActions:
     have_value: false
     reset: false
   ident:
+    save_value: true
+  int:
     save_value: true

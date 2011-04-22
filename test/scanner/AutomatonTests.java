@@ -62,6 +62,20 @@ public class AutomatonTests extends TestCase {
 		assertTrue(String.format("tokens esperado: %s\ntokens resultado: %s",tokens,result.tokens),isEqual(result.getTokens(),tokens));
 		System.out.println(result.tokens);
 	}
+	
+	public void testIntAndIdent() throws Exception {
+		
+		Automaton au = new Automaton();
+		au.init("simpleconf.yaml");
+		
+		// retorna lista de errores y lista de tokens reconocidos
+		ScanResult result = au.scan("10a");
+		System.out.println(result.tokens);
+		System.out.println(result.errors);
+		assertTrue(result.tokens.isEmpty());
+		assertTrue(!result.errors.isEmpty());
+		
+	}
 
 	public static boolean isEqual(List<Token> tokens, List<Token> tokens2) {
 		Preconditions.checkNotNull(tokens);

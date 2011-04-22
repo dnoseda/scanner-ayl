@@ -33,6 +33,19 @@ public class AutomatonTests extends TestCase {
 				new Token("ID","c001"));
 		assertTrue(String.format("tokens esperado: %s\ntokens resultado: %s",tokens,result.tokens),isEqual(result.getTokens(),tokens));
 	}
+	
+	public void testInt() throws Exception {
+		
+		Automaton au = new Automaton();
+		au.init("simpleconf.yaml");
+		
+		// retorna lista de errores y lista de tokens reconocidos
+		ScanResult result = au.scan("10 00 101");
+		List<Token> tokens = Arrays.asList(new Token("INT","10"), new Token("SEP",null),
+				new Token("INT","00"), new Token("SEP",null),
+				new Token("INT","101"));
+		assertTrue(String.format("tokens esperado: %s\ntokens resultado: %s",tokens,result.tokens),isEqual(result.getTokens(),tokens));
+	}
 
 	public static boolean isEqual(List<Token> tokens, List<Token> tokens2) {
 		Preconditions.checkNotNull(tokens);

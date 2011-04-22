@@ -11,7 +11,7 @@ import com.google.common.collect.Maps;
 
 public class Main {
 	
-	static Map<String,Actionable> semanticActions = Maps.newHashMap();
+	static Map<String,Map<String,Object>> semanticActions = Maps.newHashMap();
 	static Map<String,Map<Character,String>> transitions = Maps.newHashMap();
 	static interface Actionable{
 		void doAction(Automaton automaton);
@@ -30,24 +30,28 @@ public class Main {
 		initIDENT_FINAL();
 	}		
 	private static void initIDENT_FINAL() {
-		semanticActions.put("ident_final", new Actionable() {
-			public void doAction(Automaton automaton) {
-				// retornar identificador
-				System.out.println(String.format("==> en pos %d hasta %d, (ID, %s)", automaton.initialPos,automaton.pos-2, automaton.getTempString()));
-				automaton.tokens.add(new Token("ID",automaton.getTempString()));
-				automaton.execEpsilon();
-			}
-		});
+		
+		Map<String,Object> aux = new ImmutableMap.Builder<String,Object>()
+			.put("token_id", "id")
+			.put("have_value", true)
+			.put("reset", true).build();
+		semanticActions.put("ident_final", aux);
 	}
 	private static void initINT_FINAL() {
-		semanticActions.put("int_final", new Actionable() {
+		Map<String,Object> aux = new ImmutableMap.Builder<String,Object>()
+				.put("token_id", "int")
+				.put("have_value", true)
+				.put("reset", true).build();
+		semanticActions.put("int_final", aux);
+				
+		new Actionable() {
 			public void doAction(Automaton automaton) {
 				// retornar identificador
 				System.out.println(String.format("==> en pos %d hasta %d, (INT, %s)", automaton.initialPos, automaton.pos-2, automaton.getTempString()));
 				automaton.tokens.add(new Token("INT",automaton.getTempString()));
 				automaton.execEpsilon();
 			}
-		});
+		};
 	}
 	private static void initIDENT() {
 		Map<Character, String> aux;
@@ -61,14 +65,8 @@ public class Main {
 											.put('.', "ident_final")
 											.put('$', "ident_final").build();
 		transitions.put("ident", aux);
-		semanticActions.put("ident", new Actionable() {
-			public void doAction(Automaton automaton) {
-				automaton.temp.add(automaton.index);
-				if(automaton.initialPos<0){
-					automaton.initialPos = automaton.pos-1;
-				}
-			}
-		});
+		Map<String, Object> auxS = new ImmutableMap.Builder<String, Object>().put("save_value",true).build();
+		semanticActions.put("ident",auxS);
 	}
 	private static void initINT() {
 		Map<Character, String> aux;
@@ -82,19 +80,19 @@ public class Main {
 											.put('.', "int_final")
 											.put('$',"int_final").build();
 		transitions.put("int", aux);
-		semanticActions.put("int", new Actionable() {
-			public void doAction(Automaton automaton) {
-				automaton.temp.add(automaton.index);
-				if(automaton.initialPos<0){
-					automaton.initialPos = automaton.pos-1;
-				}
-			}
-		});
+		Map<String, Object> auxS = new ImmutableMap.Builder<String, Object>().put("save_value",true).build();
+		semanticActions.put("int",auxS);
 	}
 	
 	
 	private static void initESP() {
-		semanticActions.put("esp",new Actionable() {
+		Map<String, Object> auxS = new ImmutableMap.Builder<String, Object>()
+							.put("token_id","SEP")
+						    .put("have_value",false)
+						    .put("reset",false)
+							.build();
+		semanticActions.put("esp",auxS);
+		new Actionable() {
 			public void doAction(Automaton automaton) {
 				//entregar separador
 				System.out.println(String.format("==> en pos %d, (SEP, )", automaton.pos-1));
@@ -103,7 +101,7 @@ public class Main {
 				// ir a inicial
 				automaton.state = "initial";
 			}
-		});
+		};
 	}
 	private static void initINITIAL() {
 		Map<Character,String> aux = new ImmutableMap.Builder<Character,String>()
@@ -135,16 +133,16 @@ public class Main {
 					+ state.toUpperCase() + ", temp=\"" + temp + "\"]";
 		}
 		public void execEpsilon(){
+			// volver a "initial", ejecucion epsilon
+			state= "initial";
+		}
+		public void goBackAndReset(){
+			// volver el puntero 1 para atras
+			pos--;
 			//vaciar temporal
 			temp.clear();
 			// restart pos inicial temporal
 			initialPos = -1;
-
-			// volver a "initial", ejecucion epsilon
-			state= "initial";
-			
-			// volver el puntero 1 para atras
-			pos--;
 		}
 		
 		List<Token> tokens = Lists.newArrayList(); 
@@ -180,7 +178,22 @@ public class Main {
 				} else {
 					au.state = nextState;
 					if (semanticActions.containsKey(au.state)) {
-						semanticActions.get(au.state).doAction(au);
+						Map<String,Object> action = semanticActions.get(au.state);
+						if(action.containsKey("save_value") && (Boolean)action.get("save_value")){
+							au.temp.add(au.index);
+							if(au.initialPos<0){
+								au.initialPos = au.pos-1;
+							}
+						}else{ // Estado final y por lo tanto epsilon a inicial
+							String tokenId = (String)action.get("token_id");
+							boolean reset = (Boolean)action.get("reset");
+							boolean haveValue = (Boolean)action.get("have_value");
+							au.tokens.add(new Token(tokenId, haveValue ? au.getTempString() : null));
+							if(reset){
+								au.goBackAndReset();
+							}
+							au.execEpsilon();
+						}
 					}
 				}
 			}

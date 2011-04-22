@@ -1,5 +1,5 @@
 transitions:
-  ident: !com.google.common.collect.RegularImmutableMap
+  ident:
     a: ident
     b: ident
     c: ident
@@ -8,7 +8,7 @@ transitions:
     " ": ident_final
     .: ident_final
     $: ident_final
-  int: !com.google.common.collect.RegularImmutableMap
+  int:
     a: int_final
     b: int_final
     c: int_final
@@ -17,7 +17,7 @@ transitions:
     " ": int_final
     .: int_final
     $: int_final
-  initial: !com.google.common.collect.RegularImmutableMap
+  initial:
     a: ident
     b: ident
     c: ident
@@ -25,3 +25,19 @@ transitions:
     "1": int
     " ": esp
     $: end
+
+semanticActions:
+  ident_final:
+    token_id: "ID"
+    have_value: true
+    reset: true
+  int_final:
+    token_id: "INT"
+    have_value: true
+    reset: true
+  sep:
+    token_id: "SEP"
+    have_value: false
+    reset: false
+  ident:
+    save_value: true

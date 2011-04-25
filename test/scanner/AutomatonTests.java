@@ -72,8 +72,9 @@ public class AutomatonTests extends TestCase {
 		ScanResult result = au.scan("10a");
 		System.out.println(result.tokens);
 		System.out.println(result.errors);
-		assertTrue(result.tokens.isEmpty());
-		assertTrue(!result.errors.isEmpty());
+		List<Token> tokens = Arrays.asList(new Token("INT","10"), new Token("ID","a"));
+		assertTrue(isEqual(tokens,result.tokens));
+		assertTrue(result.errors.isEmpty());
 		
 	}
 

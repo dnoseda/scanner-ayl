@@ -54,6 +54,14 @@ transitions:
     Z: ident
     "0": int
     "1": int
+    "2": int
+    "3": int
+    "4": int
+    "5": int
+    "6": int
+    "7": int
+    "8": int
+    "9": int
     " ": sep
     $: end
   ident:
@@ -111,6 +119,14 @@ transitions:
     Z: ident
     "0": ident
     "1": ident
+    "2": ident
+    "3": ident
+    "4": ident
+    "5": ident
+    "6": ident
+    "7": ident
+    "8": ident
+    "9": ident
     " ": ident_final
     .: ident_final
     $: ident_final
@@ -169,18 +185,88 @@ transitions:
     Z: int_final
     "0": int
     "1": int
+    "2": int
+    "3": int
+    "4": int
+    "5": int
+    "6": int
+    "7": int
+    "8": int
+    "9": int
     " ": int_final
     .: real_aux
     $: int_final
   real_aux:
     "0": real
     "1": real
+    "2": real
+    "3": real
+    "4": real
+    "5": real
+    "6": real
+    "7": real
+    "8": real
+    "9": real
   real:
     "0": real
     "1": real
-    a: real_final
-    b: real_final
-    c: real_final
+    "2": real
+    "3": real
+    "4": real
+    "5": real
+    "6": real
+    "7": real
+    "8": real
+    "9": real
+    d: real_final
+    e: real_final
+    f: real_final
+    g: real_final
+    h: real_final
+    i: real_final
+    j: real_final
+    k: real_final
+    l: real_final
+    m: real_final
+    n: real_final
+    o: real_final
+    p: real_final
+    q: real_final
+    r: real_final
+    s: real_final
+    t: real_final
+    u: real_final
+    v: real_final
+    w: real_final
+    x: real_final
+    y: real_final
+    z: real_final
+    A: real_final
+    B: real_final
+    C: real_final
+    D: real_final
+    E: real_final
+    F: real_final
+    G: real_final
+    H: real_final
+    I: real_final
+    J: real_final
+    K: real_final
+    L: real_final
+    M: real_final
+    N: real_final
+    O: real_final
+    P: real_final
+    Q: real_final
+    R: real_final
+    S: real_final
+    T: real_final
+    U: real_final
+    V: real_final
+    W: real_final
+    X: real_final
+    Y: real_final
+    Z: real_final
     " ": real_final
     .: real_final
     $: real_final

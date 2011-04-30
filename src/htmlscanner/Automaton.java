@@ -10,6 +10,8 @@ import org.ho.yaml.Yaml;
 
 import scanner.ScanResult;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -46,6 +48,11 @@ public class Automaton {
 	char index;
 	String state = "initial";
 	List<Character> temp = Lists.newArrayList();
+	private List<String> deltaExec = Lists.newArrayList();;
+
+	public List<String> getDeltaExec() {
+		return ImmutableList.copyOf(deltaExec);
+	}
 
 	String getTempString() {
 		StringBuilder str = new StringBuilder();
@@ -88,9 +95,9 @@ public class Automaton {
 					index = '$'; // end of file
 					pos++;
 				}
+				Preconditions.checkState(transitions.containsKey(state),"can't find state %S in settings",state);
 				String nextState = transitions.get(state).get(index);
-				//System.out.println(String.format("Delta(%S, '%c') = %S",
-//						state, index, nextState));
+				deltaExec .add(String.format("Delta(%S, '%c') = %S",state, index, nextState));
 				if (nextState == null) {
 					errors.add(String.format("ERROR pos %d", pos));
 				} else {
@@ -100,7 +107,6 @@ public class Automaton {
 								.get(state);
 						if (action.containsKey("save_value")
 								&& (Boolean) action.get("save_value")) {
-							//System.out.println("guardo valor");
 							temp.add(index);
 							if (initialPos < 0) {
 								initialPos = pos - 1;
@@ -114,16 +120,6 @@ public class Automaton {
 							Token token = new Token(tokenId,
 									haveValue ? getTempString() : null);
 							tokens.add(token);
-							if (haveValue) {
-								//System.out.println(String.format(
-//										"==> en pos %d hasta %d, (%s, %s)",
-//										initialPos, pos - 2,
-//										token.getCode(), token.getValue()));
-							} else {
-								//System.out.println(String.format(
-//										"==> en pos %d, (%s, null)",
-//										pos - 1, token.getCode()));
-							}
 							if (reset) {
 								goBack();
 							}

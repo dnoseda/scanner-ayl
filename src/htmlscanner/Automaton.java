@@ -66,15 +66,16 @@ public class Automaton {
 		state = "initial";
 	}
 
-	public void goBackAndReset() {
+	public void goBack() {
 		// volver el puntero 1 para atras
 		pos--;
+	}
+	public void cleanTemp(){
 		// vaciar temporal
 		temp.clear();
 		// restart pos inicial temporal
 		initialPos = -1;
 	}
-
 	
 	public ScanResult scan(String input) {
 		List<Token> tokens = Lists.newArrayList();
@@ -107,9 +108,9 @@ public class Automaton {
 						} else { // Estado final y por lo tanto epsilon a
 									// inicial
 							String tokenId = (String) action.get("token_id");
-							boolean reset = (Boolean) action.get("reset");
-							boolean haveValue = (Boolean) action
-									.get("have_value");
+							boolean reset = getBooleanValue(action,"reset");
+							boolean clean = getBooleanValue(action,"clean");
+							boolean haveValue = getBooleanValue(action,"have_value");
 							Token token = new Token(tokenId,
 									haveValue ? getTempString() : null);
 							tokens.add(token);
@@ -124,8 +125,10 @@ public class Automaton {
 //										pos - 1, token.getCode()));
 							}
 							if (reset) {
-								//System.out.println("reset");
-								goBackAndReset();
+								goBack();
+							}
+							if(clean){
+								cleanTemp();
 							}
 							execEpsilon();
 						}
@@ -140,6 +143,10 @@ public class Automaton {
 		result.setErrors(errors);
 		result.setTokens(tokens);
 		return result;
+	}
+
+	private boolean getBooleanValue(Map<String, Object> action, String key) {
+		return action.containsKey(key) ? (Boolean)action.get(key) : false;
 	}
 	
 	

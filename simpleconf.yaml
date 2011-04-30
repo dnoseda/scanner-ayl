@@ -3,10 +3,13 @@ transitions:
     abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ: ident    
     "1234567890": int    
     " ": sep
+    "\"": string
     $: end
+  string:
+    abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890: string
+    "\"": string_final
   ident:
-    abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ: ident
-    "1234567890": ident    
+    abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890: ident
     " .$": ident_final    
   int:
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$": int_final
@@ -19,22 +22,28 @@ transitions:
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$": real_final
     
 semanticActions:
+  string_final:
+    token_id: "string"
+    have_value: true
+    reset: false
+    clean: true
   ident_final:
     token_id: "ID"
     have_value: true
     reset: true
+    clean: true
   int_final:
     token_id: "INT"
     have_value: true
     reset: true
+    clean: true
   real_final:
     token_id: "REAL"
     have_value: true
     reset: true
+    clean: true
   sep:
     token_id: "SEP"
-    have_value: false
-    reset: false
   ident:
     save_value: true
   int:
@@ -42,4 +51,6 @@ semanticActions:
   real:
     save_value: true
   real_aux:
+    save_value: true
+  string:
     save_value: true

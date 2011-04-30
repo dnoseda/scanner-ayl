@@ -3,6 +3,55 @@ transitions:
     a: ident
     b: ident
     c: ident
+    d: ident
+    e: ident
+    f: ident
+    g: ident
+    h: ident
+    i: ident
+    j: ident
+    k: ident
+    l: ident
+    m: ident
+    n: ident
+    o: ident
+    p: ident
+    q: ident
+    r: ident
+    s: ident
+    t: ident
+    u: ident
+    v: ident
+    w: ident
+    x: ident
+    y: ident
+    z: ident
+    A: ident
+    B: ident
+    C: ident
+    D: ident
+    E: ident
+    F: ident
+    G: ident
+    H: ident
+    I: ident
+    J: ident
+    K: ident
+    L: ident
+    M: ident
+    N: ident
+    O: ident
+    P: ident
+    Q: ident
+    R: ident
+    S: ident
+    T: ident
+    U: ident
+    V: ident
+    W: ident
+    X: ident
+    Y: ident
+    Z: ident
     "0": int
     "1": int
     " ": sep
@@ -11,6 +60,55 @@ transitions:
     a: ident
     b: ident
     c: ident
+    d: ident
+    e: ident
+    f: ident
+    g: ident
+    h: ident
+    i: ident
+    j: ident
+    k: ident
+    l: ident
+    m: ident
+    n: ident
+    o: ident
+    p: ident
+    q: ident
+    r: ident
+    s: ident
+    t: ident
+    u: ident
+    v: ident
+    w: ident
+    x: ident
+    y: ident
+    z: ident
+    A: ident
+    B: ident
+    C: ident
+    D: ident
+    E: ident
+    F: ident
+    G: ident
+    H: ident
+    I: ident
+    J: ident
+    K: ident
+    L: ident
+    M: ident
+    N: ident
+    O: ident
+    P: ident
+    Q: ident
+    R: ident
+    S: ident
+    T: ident
+    U: ident
+    V: ident
+    W: ident
+    X: ident
+    Y: ident
+    Z: ident
     "0": ident
     "1": ident
     " ": ident_final
@@ -20,6 +118,55 @@ transitions:
     a: int_final
     b: int_final
     c: int_final
+    d: int_final
+    e: int_final
+    f: int_final
+    g: int_final
+    h: int_final
+    i: int_final
+    j: int_final
+    k: int_final
+    l: int_final
+    m: int_final
+    n: int_final
+    o: int_final
+    p: int_final
+    q: int_final
+    r: int_final
+    s: int_final
+    t: int_final
+    u: int_final
+    v: int_final
+    w: int_final
+    x: int_final
+    y: int_final
+    z: int_final
+    A: int_final
+    B: int_final
+    C: int_final
+    D: int_final
+    E: int_final
+    F: int_final
+    G: int_final
+    H: int_final
+    I: int_final
+    J: int_final
+    K: int_final
+    L: int_final
+    M: int_final
+    N: int_final
+    O: int_final
+    P: int_final
+    Q: int_final
+    R: int_final
+    S: int_final
+    T: int_final
+    U: int_final
+    V: int_final
+    W: int_final
+    X: int_final
+    Y: int_final
+    Z: int_final
     "0": int
     "1": int
     " ": int_final

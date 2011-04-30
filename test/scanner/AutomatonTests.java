@@ -60,12 +60,29 @@ public class AutomatonTests extends TestCase {
 		System.out.println(result.errors);
 	}
 	
-	public void testAllLetters() throws Exception {
-		String allLetters = "abcdefghijklmnopqrstuvwxyz";
+	static String allLetters = "abcdefghijklmnopqrstuvwxyz";
+	static{
 		allLetters += allLetters.toUpperCase();
+	}
+	public void testAllLetters() throws Exception {
 		ScanResult result = scan(allLetters);
 		printResult(result);
 		List<Token> expected =Arrays.asList(new Token("ID",allLetters));
+		assertTrue(isEqual(expected ,result.tokens));
+	}
+	public void testMiscLettersNumbers() throws Exception {
+		ScanResult result = scan("apo9231 1231assqe 2.3 FUUUj1223lAq1j2zx31");
+		printResult(result);
+		List<Token> expected =Arrays.asList(
+					new Token("ID","apo9231"),
+					new Token("SEP",null),
+					new Token("INT","1231"),
+					new Token("ID","assqe"),
+					new Token("SEP",null),
+					new Token("REAL","2.3"),
+					new Token("SEP",null),
+					new Token("ID","FUUUj1223lAq1j2zx31")
+				);
 		assertTrue(isEqual(expected ,result.tokens));
 	}
 

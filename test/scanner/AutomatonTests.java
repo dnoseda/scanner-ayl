@@ -55,7 +55,7 @@ public class AutomatonTests extends TestCase {
 		
 	}
 
-	private void printResult(ScanResult result) {
+	protected void printResult(ScanResult result) {
 		System.out.println(result.tokens);
 		System.out.println(result.errors);
 	}
@@ -86,7 +86,7 @@ public class AutomatonTests extends TestCase {
 		assertTrue(isEqual(expected ,result.tokens));
 	}
 
-	private ScanResult scan(String input) {
+	public ScanResult scan(String input) {
 		Automaton au = new Automaton();
 		au.init("simpleconf.yaml");
 		

@@ -30,7 +30,10 @@ public class Automaton {
 				Map<Character,String> value = Maps.newHashMap();
 				for(Object obj0: ((Map)ent.getValue()).entrySet()){
 					Entry ent1 = (Entry) obj0;
-					value.put(String.valueOf(ent1.getKey()).charAt(0), String.valueOf(ent1.getValue()));
+					String key = String.valueOf(ent1.getKey());
+					for(char c:key.toCharArray()){
+						value.put(c, String.valueOf(ent1.getValue()));
+					}
 				}
 				transitions.put((String)ent.getKey(), value);
 			}

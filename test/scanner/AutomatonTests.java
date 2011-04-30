@@ -48,12 +48,25 @@ public class AutomatonTests extends TestCase {
 	public void testIntAndIdent() throws Exception {
 		String input = "10a";
 		ScanResult result = scan(input);
-		System.out.println(result.tokens);
-		System.out.println(result.errors);
+		printResult(result);
 		List<Token> tokens = Arrays.asList(new Token("INT","10"), new Token("ID","a"));
 		assertTrue(isEqual(tokens,result.tokens));
 		assertTrue(result.errors.isEmpty());
 		
+	}
+
+	private void printResult(ScanResult result) {
+		System.out.println(result.tokens);
+		System.out.println(result.errors);
+	}
+	
+	public void testAllLetters() throws Exception {
+		String allLetters = "abcdefghijklmnopqrstuvwxyz";
+		allLetters += allLetters.toUpperCase();
+		ScanResult result = scan(allLetters);
+		printResult(result);
+		List<Token> expected =Arrays.asList(new Token("ID",allLetters));
+		assertTrue(isEqual(expected ,result.tokens));
 	}
 
 	private ScanResult scan(String input) {

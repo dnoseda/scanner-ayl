@@ -13,7 +13,9 @@ public class MiscAutomationTests extends AutomatonTests {
 	}
 	
 	public void testIdent() throws Exception {
-		assertTokens(token("ID","a10").and("SEP",null).and("ID","bbb").and("SEP",null).and("ID","c001"), "a10 bbb c001");
+		assertTokens(
+				token("ID", "a10").and("SEP", null).and("ID", "bbb")
+						.and("SEP", null).and("ID", "c001"), "a10 bbb c001");
 	}
 	
 	public void testInt() throws Exception {

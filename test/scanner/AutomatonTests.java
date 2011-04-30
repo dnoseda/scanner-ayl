@@ -12,22 +12,14 @@ import junit.framework.TestCase;
 
 public class AutomatonTests extends TestCase {
 	public void testEmtpy() throws Exception {
-		Automaton au = new Automaton();
-		au.init("simpleconf.yaml");
-		
-		// retorna lista de errores y lista de tokens reconocidos
-		ScanResult result = au.scan("");
+		ScanResult result = scan("");
 		assertTrue(result.getTokens().isEmpty());
 		assertTrue(result.getErrors().isEmpty());
 	}
 	
 	public void testIdent() throws Exception {
 		
-		Automaton au = new Automaton();
-		au.init("simpleconf.yaml");
-		
-		// retorna lista de errores y lista de tokens reconocidos
-		ScanResult result = au.scan("a10 bbb c001");
+		ScanResult result = scan("a10 bbb c001");
 		List<Token> tokens = Arrays.asList(new Token("ID","a10"), new Token("SEP",null),
 				new Token("ID","bbb"), new Token("SEP",null),
 				new Token("ID","c001"));
@@ -36,12 +28,7 @@ public class AutomatonTests extends TestCase {
 	}
 	
 	public void testInt() throws Exception {
-		
-		Automaton au = new Automaton();
-		au.init("simpleconf.yaml");
-		
-		// retorna lista de errores y lista de tokens reconocidos
-		ScanResult result = au.scan("10 00 101");
+		ScanResult result = scan("10 00 101");
 		List<Token> tokens = Arrays.asList(new Token("INT","10"), new Token("SEP",null),
 				new Token("INT","00"), new Token("SEP",null),
 				new Token("INT","101"));
@@ -50,12 +37,7 @@ public class AutomatonTests extends TestCase {
 	}
 	
 	public void testReal() throws Exception {
-		
-		Automaton au = new Automaton();
-		au.init("simpleconf.yaml");
-		
-		// retorna lista de errores y lista de tokens reconocidos
-		ScanResult result = au.scan("10 0.01 101");
+		ScanResult result = scan("10 0.01 101");
 		List<Token> tokens = Arrays.asList(new Token("INT","10"), new Token("SEP",null),
 				new Token("REAL","0.01"), new Token("SEP",null),
 				new Token("INT","101"));
@@ -64,18 +46,22 @@ public class AutomatonTests extends TestCase {
 	}
 	
 	public void testIntAndIdent() throws Exception {
-		
-		Automaton au = new Automaton();
-		au.init("simpleconf.yaml");
-		
-		// retorna lista de errores y lista de tokens reconocidos
-		ScanResult result = au.scan("10a");
+		String input = "10a";
+		ScanResult result = scan(input);
 		System.out.println(result.tokens);
 		System.out.println(result.errors);
 		List<Token> tokens = Arrays.asList(new Token("INT","10"), new Token("ID","a"));
 		assertTrue(isEqual(tokens,result.tokens));
 		assertTrue(result.errors.isEmpty());
 		
+	}
+
+	private ScanResult scan(String input) {
+		Automaton au = new Automaton();
+		au.init("simpleconf.yaml");
+		
+		ScanResult result = au.scan(input);
+		return result;
 	}
 
 	public static boolean isEqual(List<Token> tokens, List<Token> tokens2) {

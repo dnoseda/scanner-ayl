@@ -25,7 +25,7 @@ transitions:
     
 semanticActions:
   string_final:
-    token_id: "string"
+    token_id: "STRING"
     have_value: true
     reset: false
     clean: true

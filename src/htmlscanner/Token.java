@@ -7,7 +7,7 @@ public class Token {
 		return code;
 	}
 	public void setCode(String code) {
-		this.code = code;
+		this.code = code.toUpperCase();
 	}
 	public String getValue() {
 		return value;
@@ -17,7 +17,7 @@ public class Token {
 	}
 	@Override
 	public String toString() {
-		return "Token [code=" + code + ", value=" + value + "]";
+		return "Token [code=" + code + ", value='" + value + "']";
 	}
 	public Token(String code, String value) {
 		super();

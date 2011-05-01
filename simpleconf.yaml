@@ -14,7 +14,7 @@ transitions:
     abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890: ident
     " .$": ident_final    
   int:
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$": int_final
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$\"": int_final
     "1234567890": int
     .: real_aux
   real_aux:

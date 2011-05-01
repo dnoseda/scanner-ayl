@@ -3,8 +3,9 @@ package scanner;
 import htmlscanner.Automaton;
 import htmlscanner.Token;
 
-import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
@@ -16,6 +17,13 @@ public class AutomatonTests extends TestCase {
 	protected void printResult(ScanResult result) {
 		System.out.println("Tokens: " + result.tokens);
 		System.out.println("Errors: " + result.errors);
+		if(log){
+			System.out.println("Delta:\n\t" + StringUtils.join(result.getDeltaExec(),"\n\t"));
+		}
+	}
+	boolean log= false;
+	protected void setLog(boolean value){
+		log = value;
 	}
 
 	protected static String allLetters = "abcdefghijklmnopqrstuvwxyz";

@@ -6,6 +6,7 @@ public class StringCharTests extends AutomatonTests {
 	}
 	
 	public void testStringAndNumber() throws Exception {
+		setLog(true);
 		assertTokens(token("INT","123").and("STRING","astring"),"123\"astring\"");
 	}
 }

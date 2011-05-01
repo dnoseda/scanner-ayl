@@ -27,4 +27,13 @@ public class ScanResult {
 	public String toString() {
 		return String.format("Tokens %s\nErrores: %s", tokens,errors);
 	}
+	private List<String> deltaExec;
+
+	public List<String> getDeltaExec() {
+		return deltaExec;
+	}
+
+	public void setDeltaExec(List<String> deltaExec) {
+		this.deltaExec = deltaExec;
+	}
 }

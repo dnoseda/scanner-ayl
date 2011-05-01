@@ -142,6 +142,7 @@ public class Automaton {
 		ScanResult result = new ScanResult();
 		result.setErrors(errors);
 		result.setTokens(tokens);
+		result.setDeltaExec(deltaExec );
 		return result;
 	}
 

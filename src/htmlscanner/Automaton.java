@@ -18,31 +18,32 @@ import com.google.common.collect.Maps;
 public class Automaton {
 	Map<String, Map<String, Object>> semanticActions = Maps.newHashMap();
 	Map<String, Map<Character, String>> transitions = Maps.newHashMap();
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void init(String fileName) {
 		try {
-			Map<String, Object> config = Yaml.loadType(new File(
-					fileName), HashMap.class);
+			Map<String, Object> config = Yaml.loadType(new File(fileName),
+					HashMap.class);
 			semanticActions = (Map<String, Map<String, Object>>) config
 					.get("semanticActions");
-			Map aux= (Map) config
-					.get("transitions");
-			for(Object obj: aux.entrySet()){
-				Entry ent = (Entry)obj;
-				Map<Character,String> value = Maps.newHashMap();
-				for(Object obj0: ((Map)ent.getValue()).entrySet()){
+			Map aux = (Map) config.get("transitions");
+			for (Object obj : aux.entrySet()) {
+				Entry ent = (Entry) obj;
+				Map<Character, String> value = Maps.newHashMap();
+				for (Object obj0 : ((Map) ent.getValue()).entrySet()) {
 					Entry ent1 = (Entry) obj0;
 					String key = String.valueOf(ent1.getKey());
-					for(char c:key.toCharArray()){
+					for (char c : key.toCharArray()) {
 						value.put(c, String.valueOf(ent1.getValue()));
 					}
 				}
-				transitions.put((String)ent.getKey(), value);
+				transitions.put((String) ent.getKey(), value);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	protected int initialPos;
 	int pos = 0;
 	char index;
@@ -77,13 +78,14 @@ public class Automaton {
 		// volver el puntero 1 para atras
 		pos--;
 	}
-	public void cleanTemp(){
+
+	public void cleanTemp() {
 		// vaciar temporal
 		temp.clear();
 		// restart pos inicial temporal
 		initialPos = -1;
 	}
-	
+
 	public ScanResult scan(String input) {
 		List<Token> tokens = Lists.newArrayList();
 		List<String> errors = Lists.newArrayList();
@@ -95,16 +97,17 @@ public class Automaton {
 					index = '$'; // end of file
 					pos++;
 				}
-				Preconditions.checkState(transitions.containsKey(state),"can't find state %S in settings",state);
+				Preconditions.checkState(transitions.containsKey(state),
+						"can't find state %S in settings", state);
 				String nextState = transitions.get(state).get(index);
-				deltaExec .add(String.format("Delta(%S, '%c') = %S",state, index, nextState));
+				deltaExec.add(String.format("Delta(%S, '%c') = %S", state,
+						index, nextState));
 				if (nextState == null) {
 					errors.add(String.format("ERROR pos %d", pos));
 				} else {
 					state = nextState;
 					if (semanticActions.containsKey(state)) {
-						Map<String, Object> action = semanticActions
-								.get(state);
+						Map<String, Object> action = semanticActions.get(state);
 						if (action.containsKey("save_value")
 								&& (Boolean) action.get("save_value")) {
 							temp.add(index);
@@ -114,16 +117,17 @@ public class Automaton {
 						} else { // Estado final y por lo tanto epsilon a
 									// inicial
 							String tokenId = (String) action.get("token_id");
-							boolean reset = getBooleanValue(action,"reset");
-							boolean clean = getBooleanValue(action,"clean");
-							boolean haveValue = getBooleanValue(action,"have_value");
+							boolean reset = getBooleanValue(action, "reset");
+							boolean clean = getBooleanValue(action, "clean");
+							boolean haveValue = getBooleanValue(action,
+									"have_value");
 							Token token = new Token(tokenId,
 									haveValue ? getTempString() : null);
 							tokens.add(token);
 							if (reset) {
 								goBack();
 							}
-							if(clean){
+							if (clean) {
 								cleanTemp();
 							}
 							execEpsilon();
@@ -142,9 +146,7 @@ public class Automaton {
 	}
 
 	private boolean getBooleanValue(Map<String, Object> action, String key) {
-		return action.containsKey(key) ? (Boolean)action.get(key) : false;
+		return action.containsKey(key) ? (Boolean) action.get(key) : false;
 	}
-	
-	
 
 }

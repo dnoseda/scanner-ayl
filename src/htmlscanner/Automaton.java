@@ -98,7 +98,7 @@ public class Automaton {
 					pos++;
 				}
 				Preconditions.checkState(transitions.containsKey(state),
-						"can't find state %S in settings", state);
+						"can't find state %s in settings", state);
 				String nextState = transitions.get(state).get(index);
 				deltaExec.add(String.format("Delta(%S, '%c') = %S", state,
 						index, nextState));

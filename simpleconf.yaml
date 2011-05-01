@@ -4,7 +4,12 @@ transitions:
     "1234567890": int    
     " ": sep
     "\"": string_prev
+    "'": char_prev
     $: end
+  char_prev:
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 .\"": char
+  char:
+    "'": char_final  
   string_prev:
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 .": string
   string:
@@ -24,6 +29,11 @@ transitions:
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$": real_final
     
 semanticActions:
+  char_final:
+    token_id: "CHAR"
+    have_value: true
+    reset: false
+    clean: true
   string_final:
     token_id: "STRING"
     have_value: true
@@ -55,4 +65,6 @@ semanticActions:
   real_aux:
     save_value: true
   string:
+    save_value: true
+  char:
     save_value: true

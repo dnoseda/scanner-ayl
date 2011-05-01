@@ -14,4 +14,11 @@ public class StringCharTests extends AutomatonTests {
 	public void testStringAndIdent() throws Exception {
 		assertTokens(token("INT","123").and("SEP",null).and("ID","qwe12").and("STRING","otro"), "123 qwe12\"otro\"");
 	}
+	
+	public void testChar() throws Exception {
+		assertTokens(token("CHAR","a"),"'a'");
+	}
+	public void testCharError() throws Exception {
+		assertTokens(token("CHAR","a"),"'ab'");		
+	}
 }

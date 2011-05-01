@@ -12,7 +12,7 @@ import com.google.common.collect.Lists;
 
 import junit.framework.TestCase;
 
-public class AutomatonTests extends TestCase {
+public abstract class AutomatonTests extends TestCase {
 
 	protected void printResult(ScanResult result) {
 		System.out.println("Tokens: " + result.tokens);

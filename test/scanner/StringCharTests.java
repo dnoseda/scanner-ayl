@@ -21,4 +21,20 @@ public class StringCharTests extends AutomatonTests {
 	public void testCharError() throws Exception {
 		assertTokensAndError(token("CHAR","a"),"'ab'");		
 	}
+	
+	public void testCharAndOthers(){
+		String input = "123 12.2'a' a123\"astring\"1'g'";
+		
+		assertTokens(
+				token("INT", "123")
+					.and("SEP")
+					.and("REAL", "12.2")
+					.and("CHAR", "a")
+					.and("SEP")
+					.and("IDENT", "a123")
+					.and("STRING", "astring")
+					.and("INT", "1")
+					.and("CHAR", "g"),
+				input);
+	}
 }

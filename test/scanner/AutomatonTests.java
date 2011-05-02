@@ -91,6 +91,9 @@ public abstract class AutomatonTests extends TestCase {
 			tokens.add(new Token(key, value));
 			return this;
 		}
+		TokenBuilder and(String key){
+			return and(key,null);
+		}
 
 		List<Token> build() {
 			return tokens;

@@ -2,6 +2,7 @@ package scanner;
 
 import htmlscanner.Automaton;
 import htmlscanner.Token;
+import htmlscanner.TokenType;
 
 import java.util.List;
 
@@ -76,22 +77,22 @@ public abstract class AutomatonTests extends TestCase {
 		assertFalse(result.errors.isEmpty());
 	}
 
-	protected TokenBuilder token(String key, String value) {
+	protected TokenBuilder token(TokenType key, String value) {
 		return new TokenBuilder(key, value);
 	}
 
 	static class TokenBuilder {
 		List<Token> tokens = Lists.newArrayList();
 
-		TokenBuilder(String key, String value) {
+		TokenBuilder(TokenType key, String value) {
 			tokens.add(new Token(key, value));
 		}
 
-		TokenBuilder and(String key, String value) {
+		TokenBuilder and(TokenType key, String value) {
 			tokens.add(new Token(key, value));
 			return this;
 		}
-		TokenBuilder and(String key){
+		TokenBuilder and(TokenType key){
 			return and(key,null);
 		}
 

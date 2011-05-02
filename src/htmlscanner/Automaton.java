@@ -121,7 +121,7 @@ public class Automaton {
 							boolean clean = getBooleanValue(action, "clean");
 							boolean haveValue = getBooleanValue(action,
 									"have_value");
-							Token token = new Token(tokenId,
+							Token token = new Token(TokenType.valueOf(tokenId),
 									haveValue ? getTempString() : null);
 							tokens.add(token);
 							if (reset) {

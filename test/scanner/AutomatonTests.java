@@ -66,6 +66,7 @@ public abstract class AutomatonTests extends TestCase {
 		assertTrue(String.format("expected: %s and current %s",
 				expected.build(), result.tokens),
 				isEqual(expected.build(), result.tokens));
+		assertTrue(result.errors.isEmpty());
 	}
 	
 	protected void assertTokensAndError(TokenBuilder expected, String input) {

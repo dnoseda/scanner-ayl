@@ -31,7 +31,7 @@ public class StringCharTests extends AutomatonTests {
 					.and("REAL", "12.2")
 					.and("CHAR", "a")
 					.and("SEP")
-					.and("IDENT", "a123")
+					.and("ID", "a123")
 					.and("STRING", "astring")
 					.and("INT", "1")
 					.and("CHAR", "g"),

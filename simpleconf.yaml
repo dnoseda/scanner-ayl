@@ -17,16 +17,16 @@ transitions:
     "\"": string_final
   ident:
     abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890: ident
-    " .$\"": ident_final    
+    " .$\"'": ident_final    
   int:
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$\"": int_final
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$\"'": int_final
     "1234567890": int
     .: real_aux
   real_aux:
     "1234567890": real
   real:
     "1234567890": real
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$": real_final
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$'": real_final
     
 semanticActions:
   char_final:

@@ -66,6 +66,15 @@ public abstract class AutomatonTests extends TestCase {
 				expected.build(), result.tokens),
 				isEqual(expected.build(), result.tokens));
 	}
+	
+	protected void assertTokensAndError(TokenBuilder expected, String input) {
+		ScanResult result = scan(input);
+		printResult(result);
+		assertTrue(String.format("expected: %s and current %s",
+				expected.build(), result.tokens),
+				isEqual(expected.build(), result.tokens));
+		assertFalse(result.errors.isEmpty());
+	}
 
 	protected TokenBuilder token(String key, String value) {
 		return new TokenBuilder(key, value);

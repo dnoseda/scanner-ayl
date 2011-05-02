@@ -19,6 +19,6 @@ public class StringCharTests extends AutomatonTests {
 		assertTokens(token("CHAR","a"),"'a'");
 	}
 	public void testCharError() throws Exception {
-		assertTokens(token("CHAR","a"),"'ab'");		
+		assertTokensAndError(token("CHAR","a"),"'ab'");		
 	}
 }

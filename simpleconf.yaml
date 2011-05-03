@@ -1,13 +1,20 @@
+aliases:
+  letter: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+  number: 1234567890
+  ostring: "\""
+  ochar: "'"
+  blank: " "
+  dot: "."
 transitions:
   initial:
-    abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ: ident    
-    "1234567890": int    
-    " ": sep
-    "\"": string_prev
-    "'": char_prev
+    letter: ident    
+    number: int    
+    blank: sep
+    ostring: string_prev
+    ochar: char_prev
     $: end
   char_prev:
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 .\"": char
+    "letter+number+blank+dot+ostring": char
   char:
     "'": char_final  
   string_prev:

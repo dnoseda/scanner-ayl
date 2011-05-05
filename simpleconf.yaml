@@ -23,7 +23,7 @@ transitions:
     "letter+number+dot": division_final
   comment_line:
     "letter+number+dot+blank": comment_line
-    newline: comment_line_final
+    "newline+$": comment_line_final
   multi_comment:
     "letter+number+dot+newline+slash+blank": multi_comment
     asterisk: multi_comment_final_prev

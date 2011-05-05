@@ -5,6 +5,8 @@ aliases:
   ochar: "'"
   blank: " "
   dot: "."
+  slash: "/"
+  slash_asterisk: "/"
 transitions:
   initial:
     letter: ident    
@@ -12,6 +14,8 @@ transitions:
     blank: sep
     ostring: string_prev
     ochar: char_prev
+    slash: comment
+    slash_asterisk: multilinecomment
     $: end
   char_prev:
     "letter+number+blank+dot+ostring": char
@@ -25,6 +29,12 @@ transitions:
   ident:
     abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890: ident
     " .$\"'": ident_final    
+  comment:
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 .": comment
+    "\n": comment_final
+  multilinecomment:
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 .": multilinecomment
+    "*/": multilinecomment_final
   int:
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$\"'": int_final
     "1234567890": int
@@ -75,3 +85,17 @@ semanticActions:
     save_value: true
   char:
     save_value: true
+  comment:
+    save_value: false
+  multilinecomment:
+    save_value: false
+  comment_final:
+    token_id: ""
+    have_value: false
+    reset: false
+    clean: true
+  multilinecomment_final:
+    token_id: ""
+    have_value: false
+    reset: false
+    clean: true

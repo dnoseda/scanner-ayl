@@ -14,12 +14,12 @@ public class CommentTests extends AutomatonTests {
 	}
 	
 	public void testLiteralAndComment() throws Exception {
-		setLog(true);
 		String input = "9876.004// cualquier cosa";
 		assertTokens(token(TokenType.REAL,"9876.004"), input);
 	}
 	
 	public void testMultilineComment() throws Exception {
+		setLog(true);
 		assertTokens(token(TokenType.CHAR,"a").and(TokenType.STRING,"un string"),
 				"'a'/** lkjadhqlwkjqhelk q2p34534hqlkewh lkjrhasfdoiasdfasd\nj786123874 91b7978dafsdncsaodisudybvfisndc **/\"un string\"");
 	}

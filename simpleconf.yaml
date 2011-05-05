@@ -29,7 +29,8 @@ transitions:
     asterisk: multi_comment_final_prev
   multi_comment_final_prev:
      "letter+number+dot+newline+blank": multi_comment
-     slash: multi_comment_final     
+     slash: multi_comment_final
+     asterisk: multi_comment_final_prev
   char_prev:
     "letter+number+blank+dot+ostring": char
   char:
@@ -50,7 +51,7 @@ transitions:
     "1234567890": real
   real:
     "1234567890": real
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$'": real_final
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$'/": real_final
     
 semanticActions:
   comment_line_final:

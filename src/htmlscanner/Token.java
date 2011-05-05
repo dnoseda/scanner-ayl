@@ -20,9 +20,11 @@ public class Token {
 		return "Token [code=" + code + ", value='" + value + "']";
 	}
 	public Token(TokenType code, String value) {
-		super();
 		this.code = code;
 		this.value = value;
+	}
+	public Token(TokenType code) {
+		this(code,null);
 	}
 	@Override
 	public int hashCode() {

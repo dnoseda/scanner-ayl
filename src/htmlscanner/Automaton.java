@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.ho.yaml.Yaml;
 
 import scanner.ScanResult;
@@ -134,8 +135,19 @@ public class Automaton {
 								boolean clean = getBooleanValue(action, "clean");
 								boolean haveValue = getBooleanValue(action,
 										"have_value");
-								Token token = new Token(TokenType.valueOf(tokenId),
-										haveValue ? getTempString() : null);
+								Token token = null;
+								if(haveValue){
+									String value = getTempString();
+									if(action.containsKey("limit")){
+										Preconditions.checkState(NumberUtils.isNumber(String.valueOf(action.get("limit"))));
+										int limit = (Integer) action.get("limit");
+										
+										value = value.substring(0,Math.min(value.length(), limit));
+									}
+									token = new Token(TokenType.valueOf(tokenId), value );
+								}else{
+									token = new Token(TokenType.valueOf(tokenId));
+								}
 								tokens.add(token);
 								if (reset) {
 									goBack();

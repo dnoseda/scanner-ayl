@@ -49,7 +49,7 @@ public class MiscAutomationTests extends AutomatonTests {
 	public void testAllLetters() throws Exception {
 		ScanResult result = scan(allLetters);
 		printResult(result);
-		List<Token> expected =Arrays.asList(new Token(TokenType.ID,allLetters));
+		List<Token> expected =Arrays.asList(new Token(TokenType.ID,"abcdefghijklmnop"));
 		assertTrue(isEqual(expected ,result.tokens));
 	}
 	public void testMiscLettersNumbers() throws Exception {
@@ -63,8 +63,12 @@ public class MiscAutomationTests extends AutomatonTests {
 					new Token(TokenType.SEP,null),
 					new Token(TokenType.REAL,"2.3"),
 					new Token(TokenType.SEP,null),
-					new Token(TokenType.ID,"FUUUj1223lAq1j2zx31")
+					new Token(TokenType.ID,"FUUUj1223lAq1j2z")
 				);
 		assertTrue(isEqual(expected ,result.tokens));
+	}
+	
+	public void testIdentLimit() throws Exception {
+		assertTokens(token(TokenType.ID,"FUUUj1223lAq1j2z"), "FUUUj1223lAq1j2zFUUUj1223lAq1j2zFUUUj1223lAq1j2zFUUUj1223lAq1j2z");
 	}
 }

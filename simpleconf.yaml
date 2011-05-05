@@ -70,6 +70,7 @@ semanticActions:
     clean: true
   ident_final:
     token_id: "ID"
+    limit: 16
     have_value: true
     reset: true
     clean: true

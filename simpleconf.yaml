@@ -5,6 +5,7 @@ aliases:
   ochar: "'"
   blank: " "
   dot: "."
+  slash: "/"
 transitions:
   initial:
     letter: ident    
@@ -12,13 +13,18 @@ transitions:
     blank: sep
     ostring: string_prev
     ochar: char_prev
+    slash: comment_init
     $: end
+  comment_init:
+    slash: comment_line
+    asterisk: multi_comment
+    "letter+number+dot": division_final  
   char_prev:
     "letter+number+blank+dot+ostring": char
   char:
     "'": char_final  
   string_prev:
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 .": string
+    "letter+number+dot+blank": string
   string:
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 .": string
     "\"": string_final

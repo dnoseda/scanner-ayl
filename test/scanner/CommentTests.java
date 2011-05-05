@@ -1,5 +1,9 @@
 package scanner;
 
+import org.ho.yaml.Yaml;
+
+import com.google.common.collect.ImmutableMap;
+
 import htmlscanner.TokenType;
 
 public class CommentTests extends AutomatonTests {
@@ -17,5 +21,9 @@ public class CommentTests extends AutomatonTests {
 	public void testMultilineComment() throws Exception {
 		assertTokens(token(TokenType.CHAR,"a").and(TokenType.STRING,"un string"),
 				"'a'/** lkjadhqlwkjqhelk q2p34534hqlkewh lkjrhasfdoiasdfasd\nj786123874 91b7978dafsdncsaodisudybvfisndc **/\"un string\"");
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(Yaml.dump(ImmutableMap.of("nl","\n","a","*","b","/")));
 	}
 }

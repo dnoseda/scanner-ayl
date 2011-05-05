@@ -26,14 +26,23 @@ public class Automaton {
 					HashMap.class);
 			semanticActions = (Map<String, Map<String, Object>>) config
 					.get("semanticActions");
+			Map<String,String> aliases = (Map<String, String>) config.get("aliases");
 			Map aux = (Map) config.get("transitions");
 			for (Object obj : aux.entrySet()) {
 				Entry ent = (Entry) obj;
 				Map<Character, String> value = Maps.newHashMap();
 				for (Object obj0 : ((Map) ent.getValue()).entrySet()) {
 					Entry ent1 = (Entry) obj0;
-					// TODO obtener caracteres de alias de la lista de alias para pasarle iterativamente a key
-					String key = String.valueOf(ent1.getKey());
+					String keyValue = String.valueOf(ent1.getKey());
+					StringBuilder str = new StringBuilder();
+					for(String keyValuePart: keyValue.split("\\+")){
+						if(aliases.containsKey(keyValuePart)){
+							str.append(String.valueOf(aliases.get(keyValuePart)));
+						}else{
+							str.append(keyValuePart);
+						}
+					}
+					String key = str.toString();
 					for (char c : key.toCharArray()) {
 						value.put(c, String.valueOf(ent1.getValue()));
 					}

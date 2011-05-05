@@ -118,29 +118,33 @@ public class Automaton {
 					state = nextState;
 					if (semanticActions.containsKey(state)) {
 						Map<String, Object> action = semanticActions.get(state);
-						if (action.containsKey("save_value")
-								&& (Boolean) action.get("save_value")) {
-							temp.add(index);
-							if (initialPos < 0) {
-								initialPos = pos - 1;
-							}
-						} else { // Estado final y por lo tanto epsilon a
-									// inicial
-							String tokenId = (String) action.get("token_id");
-							boolean reset = getBooleanValue(action, "reset");
-							boolean clean = getBooleanValue(action, "clean");
-							boolean haveValue = getBooleanValue(action,
-									"have_value");
-							Token token = new Token(TokenType.valueOf(tokenId),
-									haveValue ? getTempString() : null);
-							tokens.add(token);
-							if (reset) {
-								goBack();
-							}
-							if (clean) {
-								cleanTemp();
-							}
+						if(action.containsKey("discard") && (Boolean)action.get("discard")){
 							execEpsilon();
+						}else{
+							if (action.containsKey("save_value")
+									&& (Boolean) action.get("save_value")) {
+								temp.add(index);
+								if (initialPos < 0) {
+									initialPos = pos - 1;
+								}
+							} else { // Estado final y por lo tanto epsilon a
+										// inicial
+								String tokenId = (String) action.get("token_id");
+								boolean reset = getBooleanValue(action, "reset");
+								boolean clean = getBooleanValue(action, "clean");
+								boolean haveValue = getBooleanValue(action,
+										"have_value");
+								Token token = new Token(TokenType.valueOf(tokenId),
+										haveValue ? getTempString() : null);
+								tokens.add(token);
+								if (reset) {
+									goBack();
+								}
+								if (clean) {
+									cleanTemp();
+								}
+								execEpsilon();
+							}							
 						}
 					}
 				}

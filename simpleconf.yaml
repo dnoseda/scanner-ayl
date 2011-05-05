@@ -6,6 +6,8 @@ aliases:
   blank: " "
   dot: "."
   slash: "/"
+  asterisk: "*"
+  newline: "\n"
 transitions:
   initial:
     letter: ident    
@@ -18,7 +20,16 @@ transitions:
   comment_init:
     slash: comment_line
     asterisk: multi_comment
-    "letter+number+dot": division_final  
+    "letter+number+dot": division_final
+  comment_line:
+    "letter+number+dot+blank": comment_line
+    newline: comment_line_final
+  multi_comment:
+    "letter+number+dot+newline+slash+blank": multi_comment
+    asterisk: multi_comment_final_prev
+  multi_comment_final_prev:
+     "letter+number+dot+newline+blank": multi_comment
+     slash: multi_comment_final     
   char_prev:
     "letter+number+blank+dot+ostring": char
   char:
@@ -26,10 +37,10 @@ transitions:
   string_prev:
     "letter+number+dot+blank": string
   string:
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 .": string
+    "letter+number+dot+blank": string
     "\"": string_final
   ident:
-    abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890: ident
+    "letter+number": ident
     " .$\"'": ident_final    
   int:
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$\"'": int_final
@@ -42,6 +53,10 @@ transitions:
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$'": real_final
     
 semanticActions:
+  comment_line_final:
+    discard: true
+  multi_comment_final:
+    discard: true  
   char_final:
     token_id: "CHAR"
     have_value: true

@@ -8,6 +8,7 @@ import htmlscanner.TokenType;
 
 public class CommentTests extends AutomatonTests {
 	public void testCommentInLine() throws Exception {
+		setLog(true);
 		String input = "// cualquier cosa\n" +
 				"i12341";
 		assertTokens(token(TokenType.ID,"i12341"), input);

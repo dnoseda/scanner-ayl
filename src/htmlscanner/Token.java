@@ -4,7 +4,10 @@ public class Token {
 	TokenType code;
 	String value;
 	public TokenType getCode() {
-		return code;
+		return code;	
+	}
+	public int getIntCode(){
+		return code.getIntCode();
 	}
 	public void setCode(TokenType code) {
 		this.code = code;
@@ -17,7 +20,7 @@ public class Token {
 	}
 	@Override
 	public String toString() {
-		return "Token [code=" + code + ", value='" + value + "']";
+		return "Token [code=" + code + " ("+code.getIntCode()+"), value='" + value + "']";
 	}
 	public Token(TokenType code, String value) {
 		this.code = code;

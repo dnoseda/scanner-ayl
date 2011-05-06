@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.management.RuntimeErrorException;
+
 import org.apache.commons.lang.math.NumberUtils;
 import org.ho.yaml.Yaml;
 
@@ -101,9 +103,40 @@ public class Automaton {
 		List<Token> tokens = Lists.newArrayList();
 		List<String> errors = Lists.newArrayList();
 		try {
-			while (pos <= input.length()) {
-				if (pos < input.length()) {
-					index = input.charAt(pos++);
+			setInputToScan(input);
+			Token t = null;
+			while((t=getNextToken())!=null){
+				if(t.code.equals(TokenType.ERROR)){
+					errors.add(t.getValue());
+				}else{
+					tokens.add(t);
+				}
+			}
+		} catch (Exception e) {
+			System.err.println("ERROR:     estado automata:\n" + toString());
+			e.printStackTrace();
+		}
+		ScanResult result = new ScanResult();
+		result.setErrors(errors);
+		result.setTokens(tokens);
+		result.setDeltaExec(deltaExec );
+		return result;
+	}
+
+	private boolean getBooleanValue(Map<String, Object> action, String key) {
+		return action.containsKey(key) ? (Boolean) action.get(key) : false;
+	}
+
+	String inputToScan;
+	public void setInputToScan(String string) {
+		inputToScan = string;
+	}
+
+	public Token getNextToken() {
+		try {
+			while (pos <= inputToScan.length()) {
+				if (pos < inputToScan.length()) {
+					index = inputToScan.charAt(pos++);
 				} else {
 					index = '$'; // end of file
 					pos++;
@@ -114,7 +147,7 @@ public class Automaton {
 				deltaExec.add(String.format("Delta(%S, '%c') = %S", state,
 						index, nextState));
 				if (nextState == null) {
-					errors.add(String.format("ERROR pos %d", pos));
+					return new Token(TokenType.ERROR,String.format("ERROR pos %d", pos));
 				} else {
 					state = nextState;
 					if (semanticActions.containsKey(state)) {
@@ -147,8 +180,7 @@ public class Automaton {
 									token = new Token(TokenType.valueOf(tokenId), value );
 								}else{
 									token = new Token(TokenType.valueOf(tokenId));
-								}
-								tokens.add(token);
+								}								
 								if (reset) {
 									goBack();
 								}
@@ -156,6 +188,7 @@ public class Automaton {
 									cleanTemp();
 								}
 								execEpsilon();
+								return token;
 							}							
 						}
 					}
@@ -163,17 +196,9 @@ public class Automaton {
 			}
 		} catch (Exception e) {
 			System.err.println("ERROR:     estado automata:\n" + toString());
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-		ScanResult result = new ScanResult();
-		result.setErrors(errors);
-		result.setTokens(tokens);
-		result.setDeltaExec(deltaExec );
-		return result;
-	}
-
-	private boolean getBooleanValue(Map<String, Object> action, String key) {
-		return action.containsKey(key) ? (Boolean) action.get(key) : false;
+		return null;
 	}
 
 }

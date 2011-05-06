@@ -10,7 +10,6 @@ import com.google.common.collect.Lists;
 import htmlscanner.Automaton;
 import htmlscanner.Token;
 import htmlscanner.TokenType;
-import junit.framework.TestCase;
 
 public class ForDemandTests extends AutomatonTests {
 	public void testname() throws Exception {

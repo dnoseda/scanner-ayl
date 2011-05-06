@@ -2,6 +2,9 @@ package scanner;
 
 import java.util.List;
 
+import org.ho.yaml.Yaml;
+
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
 import htmlscanner.Automaton;
@@ -28,5 +31,8 @@ public class ForDemandTests extends AutomatonTests {
 						.and(TokenType.CHAR,"a")
 						.and(TokenType.SEP)
 						.and(TokenType.STRING,"hola").build(), result));
+	}
+	public static void main(String[] args) {
+		System.out.println("\""+Yaml.dump(ImmutableMap.of("all_chars","!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\n 	"))+"\"");
 	}
 }

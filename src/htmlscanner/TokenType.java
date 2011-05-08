@@ -1,14 +1,24 @@
 package htmlscanner;
 
 public enum TokenType {
-	INT(1), ID(2), STRING(3),
-	REAL(4), CHAR(5), SEP(6),
-	ERROR(7);
+	ENTERO(1), ID(2), CADENA(3), REAL(4), CARACTER(5), SEP(6), ERROR(7), ABSTRACT(
+			8), BOOLEAN(9), BREAK(10), BYTE(11), CASE(12), CATCH(13), CHAR(14), CLASS(
+			15), CONST(16), CONTINUE(17), DEFAULT(18), DO(19), DOUBLE(20), ELSE(
+			21), EXTENDS(22), FALSE(23), FINAL(24), FINALLY(25), FLOAT(26), FOR(
+			27), GOTO(28), IF(29), IMPLEMENTS(30), IMPORT(31), INSTANCEOF(32), INT(
+			33), INTERFACE(34), LONG(35), NATIVE(36), NEW(37), NULL(38), PACKAGE(
+			39), PRIVATE(40), PROTECTED(41), PUBLIC(42), RETURN(43), SHORT(44), STATIC(
+			45), STRICTFP(46), SUPER(47), SWITCH(48), SYNCHRONIZED(49), THIS(50), THROW(
+			51), THROWS(52), TRANSIENT(53), TRUE(54), TRY(55), VOID(56), VOLATILE(
+			57), WHILE(58);
+
 	private int code;
+
 	public int getIntCode() {
 		return code;
 	}
-	TokenType(int code){
+
+	TokenType(int code) {
 		this.code = code;
 	}
 }

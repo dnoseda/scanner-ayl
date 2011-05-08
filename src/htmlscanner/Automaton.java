@@ -21,6 +21,7 @@ import com.google.common.collect.Maps;
 public class Automaton {
 	Map<String, Map<String, Object>> semanticActions = Maps.newHashMap();
 	Map<String, Map<Character, String>> transitions = Maps.newHashMap();
+	Map<String, String> reservedWords = Maps.newHashMap();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void init(String fileName) {
@@ -29,8 +30,12 @@ public class Automaton {
 					HashMap.class);
 			semanticActions = (Map<String, Map<String, Object>>) config
 					.get("semanticActions");
-			Map<String,String> aliases = (Map<String, String>) config.get("aliases");
+			Map<String, String> aliases = (Map<String, String>) config
+					.get("aliases");
 			Map aux = (Map) config.get("transitions");
+
+			reservedWords = (Map<String, String>) config.get("reservedWords");
+
 			for (Object obj : aux.entrySet()) {
 				Entry ent = (Entry) obj;
 				Map<Character, String> value = Maps.newHashMap();
@@ -38,10 +43,10 @@ public class Automaton {
 					Entry ent1 = (Entry) obj0;
 					String keyValue = String.valueOf(ent1.getKey());
 					StringBuilder str = new StringBuilder();
-					for(String keyValuePart: keyValue.split("\\+")){
-						if(aliases.containsKey(keyValuePart)){
+					for (String keyValuePart : keyValue.split("\\+")) {
+						if (aliases.containsKey(keyValuePart)) {
 							str.append(String.valueOf(aliases.get(keyValuePart)));
-						}else{
+						} else {
 							str.append(keyValuePart);
 						}
 					}
@@ -105,10 +110,10 @@ public class Automaton {
 		try {
 			setInputToScan(input);
 			Token t = null;
-			while((t=getNextToken())!=null){
-				if(t.code.equals(TokenType.ERROR)){
+			while ((t = getNextToken()) != null) {
+				if (t.code.equals(TokenType.ERROR)) {
 					errors.add(t.getValue());
-				}else{
+				} else {
 					tokens.add(t);
 				}
 			}
@@ -119,7 +124,7 @@ public class Automaton {
 		ScanResult result = new ScanResult();
 		result.setErrors(errors);
 		result.setTokens(tokens);
-		result.setDeltaExec(deltaExec );
+		result.setDeltaExec(deltaExec);
 		return result;
 	}
 
@@ -128,6 +133,7 @@ public class Automaton {
 	}
 
 	String inputToScan;
+
 	public void setInputToScan(String string) {
 		inputToScan = string;
 	}
@@ -147,14 +153,16 @@ public class Automaton {
 				deltaExec.add(String.format("Delta(%S, '%c') = %S", state,
 						index, nextState));
 				if (nextState == null) {
-					return new Token(TokenType.ERROR,String.format("ERROR pos %d", pos));
+					return new Token(TokenType.ERROR, String.format(
+							"ERROR pos %d", pos));
 				} else {
 					state = nextState;
 					if (semanticActions.containsKey(state)) {
 						Map<String, Object> action = semanticActions.get(state);
-						if(action.containsKey("discard") && (Boolean)action.get("discard")){
+						if (action.containsKey("discard")
+								&& (Boolean) action.get("discard")) {
 							execEpsilon();
-						}else{
+						} else {
 							if (action.containsKey("save_value")
 									&& (Boolean) action.get("save_value")) {
 								temp.add(index);
@@ -163,24 +171,37 @@ public class Automaton {
 								}
 							} else { // Estado final y por lo tanto epsilon a
 										// inicial
-								String tokenId = (String) action.get("token_id");
+								String tokenId = (String) action
+										.get("token_id");
 								boolean reset = getBooleanValue(action, "reset");
 								boolean clean = getBooleanValue(action, "clean");
 								boolean haveValue = getBooleanValue(action,
 										"have_value");
 								Token token = null;
-								if(haveValue){
+								if (haveValue) {
 									String value = getTempString();
-									if(action.containsKey("limit")){
-										Preconditions.checkState(NumberUtils.isNumber(String.valueOf(action.get("limit"))));
-										int limit = (Integer) action.get("limit");
-										
-										value = value.substring(0,Math.min(value.length(), limit));
+									if (action.containsKey("limit")) {
+										Preconditions.checkState(NumberUtils
+												.isNumber(String.valueOf(action
+														.get("limit"))));
+										int limit = (Integer) action
+												.get("limit");
+
+										value = value
+												.substring(0, Math.min(
+														value.length(), limit));
 									}
-									token = new Token(TokenType.valueOf(tokenId), value );
-								}else{
+									/* Validacion de palabras reservadas */
+									if (tokenId.equals(TokenType.ID.name()) && reservedWords.containsKey(value)) {
+										String reservedId = reservedWords.get(value);
+										token = new Token(TokenType.valueOf(reservedId));
+									}
+									else{
+										token = new Token(TokenType.valueOf(tokenId), value);
+									}
+								} else {
 									token = new Token(TokenType.valueOf(tokenId));
-								}								
+								}
 								if (reset) {
 									goBack();
 								}
@@ -189,7 +210,7 @@ public class Automaton {
 								}
 								execEpsilon();
 								return token;
-							}							
+							}
 						}
 					}
 				}

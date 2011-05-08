@@ -20,7 +20,7 @@ public class CommentTests extends AutomatonTests {
 	
 	public void testMultilineComment() throws Exception {
 		setLog(true);
-		assertTokens(token(TokenType.CHAR,"a").and(TokenType.STRING,"un string"),
+		assertTokens(token(TokenType.CARACTER,"a").and(TokenType.CADENA,"un string"),
 				"'a'/** lkjadhqlwkjqhelk q2p34534hqlkewh lkjrhasfdoiasdfasd\nj786123874 91b7978dafsdncsaodisudybvfisndc **/\"un string\"");
 	}
 	

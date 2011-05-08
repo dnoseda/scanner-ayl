@@ -23,13 +23,13 @@ public class ForDemandTests extends AutomatonTests {
 		}
 		assert(isEqual(token(TokenType.REAL,"12.23")
 						.and(TokenType.SEP)
-						.and(TokenType.INT,"12314")
+						.and(TokenType.ENTERO,"12314")
 						.and(TokenType.SEP)
 						.and(TokenType.ID)
 						.and(TokenType.SEP)
-						.and(TokenType.CHAR,"a")
+						.and(TokenType.CARACTER,"a")
 						.and(TokenType.SEP)
-						.and(TokenType.STRING,"hola").build(), result));
+						.and(TokenType.CADENA,"hola").build(), result));
 	}
 	public static void main(String[] args) {
 		System.out.println("\""+Yaml.dump(ImmutableMap.of("all_chars","!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\n 	"))+"\"");

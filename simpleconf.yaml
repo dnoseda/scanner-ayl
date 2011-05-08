@@ -6,9 +6,24 @@ aliases:
   ochar: "'"
   blank: " "
   dot: "."
+  newline: "\n"
   slash: "/"
   asterisk: "*"
-  newline: "\n"
+  plus: "+"
+  minus: "-"
+  equal: "="
+  power: "^"
+  logic_and: "&"
+  logic_or: "|"
+  open_parenthesis: "("
+  close_parenthesis: ")"
+  open_bracket: "["
+  close_bracket: "]"
+  open_brace: "{"
+  close_brace: "}"
+  percentage: "%"
+  bigger: ">"
+  lesser: "<"
 transitions:
   initial:
     letter: ident    
@@ -17,11 +32,27 @@ transitions:
     ostring: string_prev
     ochar: char_prev
     slash: comment_init
+    asterisk: multiplication
+    plus: sum
+    minus: difference
+    equal: equal
+    power: power
+    logic_and: logic_and
+    logic_or: logic_or
+    open_parenthesis: o_p
+    close_parenthesis: c_p
+    open_bracket: o_bracket
+    close_bracket: c_bracket
+    open_brace: o_brace
+    close_brace: c_brace
+    percentage: pct
+    bigger: bigger
+    lesser: lesser
     $: end
   comment_init:
     slash: comment_line
     asterisk: multi_comment
-    "letter+number+dot": division_final
+    "letter+number+dot+blank": division_final
   comment_line:
     "letter+number+dot+blank": comment_line
     "newline+$": comment_line_final
@@ -99,6 +130,42 @@ semanticActions:
     save_value: true
   char:
     save_value: true
+  division_final:
+    token_id: "DIVISION"
+    reset: true
+    clean: true
+  multiplication:
+    token_id: "MULTIPLICATION"
+  sum:
+    token_id: "SUM"
+  difference:
+    token_id: "DIFFERENCE"
+  equal:
+    token_id: "EQUAL"
+  power:
+    token_id: "POWER"
+  logic_and:
+    token_id: "LOGIC_AND"
+  logic_or:
+    token_id: "LOGIC_OR"
+  o_p:
+    token_id: "O_P"
+  c_p:
+    token_id: "C_P"
+  o_bracket:
+    token_id: "O_BRACKET"
+  c_bracket:
+    token_id: "C_BRACKET"
+  o_brace:
+    token_id: "O_BRACE"
+  c_brace:
+    token_id: "C_BRACE"
+  pct:
+    token_id: "PCT"
+  bigger:
+    token_id: "BIGGER"
+  lesser:
+    token_id: "LESSER"
 reservedWords:
    abstract: "ABSTRACT"
    boolean: "BOOLEAN"

@@ -33,12 +33,12 @@ transitions:
     ochar: char_prev
     slash: comment_init
     asterisk: multiplication
-    plus: sum
+    plus: sum_init
     minus: difference
     equal: equal
     power: power
-    logic_and: logic_and
-    logic_or: logic_or
+    logic_and: logic_and_prev
+    logic_or: logic_or_prev
     open_parenthesis: o_p
     close_parenthesis: c_p
     open_bracket: o_bracket
@@ -49,6 +49,10 @@ transitions:
     bigger: bigger
     lesser: lesser
     $: end
+  logic_and_prev:
+    logic_and: logic_and
+  logic_or_prev:
+    logic_or: logic_or
   comment_init:
     slash: comment_line
     asterisk: multi_comment
@@ -84,7 +88,10 @@ transitions:
   real:
     "1234567890": real
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$'/": real_final
-    
+  sum_init:
+    "letter+number+dot+blank": sum
+    "=": sum_assign
+    plus: post_increment  
 semanticActions:
   comment_line_final:
     discard: true
@@ -138,6 +145,12 @@ semanticActions:
     token_id: "MULTIPLICATION"
   sum:
     token_id: "SUM"
+    reset: true
+    clean: true
+  sum_assign:
+    token_id: "SUMASSIGN"
+  post_increment:
+   token_id: "POSTINCREMENT"
   difference:
     token_id: "DIFFERENCE"
   equal:

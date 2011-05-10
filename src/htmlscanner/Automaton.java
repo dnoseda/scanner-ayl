@@ -192,7 +192,7 @@ public class Automaton {
 														value.length(), limit));
 									}
 									/* Validacion de palabras reservadas */
-									if (tokenId.equals(TokenType.ID.name()) && reservedWords.containsKey(value)) {
+									if ((tokenId.equals(TokenType.ID.name()) || tokenId.equals(TokenType.CDATA.name())) && reservedWords.containsKey(value)) {
 										String reservedId = reservedWords.get(value);
 										token = new Token(TokenType.valueOf(reservedId));
 									}

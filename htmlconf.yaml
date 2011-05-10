@@ -1,0 +1,69 @@
+aliases:
+  all_chars: "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t"
+  letter: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+  number: 1234567890
+  ostring: "\""
+  ochar: "'"
+  blank: " "
+  dot: "."
+  newline: "\n"
+  slash: "/"
+  asterisk: "*"
+  plus: "+"
+  minus: "-"
+  equal: "="
+  power: "^"
+  ampersand: "&"
+  logic_or: "|"
+  open_parenthesis: "("
+  close_parenthesis: ")"
+  open_bracket: "["
+  close_bracket: "]"
+  open_brace: "{"
+  close_brace: "}"
+  percentage: "%"
+  c_ang_p: ">"
+  o_ang_p: "<"
+  rest_cdata: "-_:."
+  no_cdata: "{}<>[]()%|&^=+*/"
+transitions:
+  initial:
+    o_ang_p: o_ang_p_final
+    c_ang_p: c_ang_p_final
+    slash: slash_final
+    equal: equal_final
+    "letter": cdata_init
+    "number": ascii_init 
+    $: end
+  cdata_init:
+    "letter+number+rest_cdata": cdata_init
+    "ostring+ochar+blank+newline+slash+no_cdata":cdata_final
+  ascii_init:
+    "letter+number": ascii_init
+semanticActions:
+  o_ang_p_final:
+    token_id: "LESSER"
+  c_ang_p_final:
+    token_id: "BIGGER"
+  slash_final:
+    token_id: "DIVISION"
+  equal_final:
+    token_id: "EQUAL"
+  cdata_init:
+    save_value: true
+  cdata_final:
+    token_id: "CDATA"
+    have_value: true
+    reset: true
+    clean: true
+reservedWords:
+   HTML: "HTML_TAG_NAME"
+   HEAD: "HEAD_TAG_NAME"
+   TITLE: "TITLE_TAG_NAME"
+   BODY: "BODY_TAG_NAME"
+   P: "P_TAG_NAME"
+   A: "A_TAG_NAME"
+   profile: "PROFILE"
+   href: "HREF"
+   class: "CLASS"
+   title: "TITLE"

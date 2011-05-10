@@ -27,7 +27,13 @@ public enum TokenType {
 			C_BRACE(72),
 			PCT(73),
 			BIGGER(74),
-			LESSER(75);
+			LESSER(75),
+			POSTINCREMENT(76), 
+			SUMASSIGN(77), 
+			HTML_TAG_NAME(78), 
+			HEAD_TAG_NAME(79), 
+			BODY_TAG_NAME(80),
+			CDATA(81);
 
 	private int code;
 

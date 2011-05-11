@@ -2,6 +2,7 @@ aliases:
   all_chars: "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t"
   letter: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
   number: 1234567890
+  bang: "!"
   ostring: "\""
   ochar: "'"
   blank: " "
@@ -24,22 +25,42 @@ aliases:
   percentage: "%"
   c_ang_p: ">"
   o_ang_p: "<"
-  rest_cdata: "-_:."
-  no_cdata: "{}[]()%|&^=+*"
+  rest_cdata: "_:."
+  no_cdata: "{}[]()%|&^=+*!?"
+  end: "$"
 transitions:
   initial:
-    o_ang_p: o_ang_p_final
+    o_ang_p: o_ang_p
     c_ang_p: c_ang_p
     slash: slash_final
     equal: equal_final
     "letter": cdata_init
     "number+no_cdata": ascii_init 
     "ostring": quoted_init
+    "newline": newline
+    "blank": blank
     $: end
+  o_ang_p:
+    "bang": multiline_comment_init
+    "letter+slash": o_ang_p_final
+  multiline_comment_init:
+    "minus": multiline_comment_prev
+  multiline_comment_prev:
+    "minus": multiline_comment
+  multiline_comment:
+    "letter+number+ostring+ochar+rest_cdata+slash+blank+newline+no_cdata": multiline_comment
+    "minus": multiline_comment_almost
+  multiline_comment_almost:
+    "minus": multiline_comment_close
+    "letter+number+ostring+ochar+rest_cdata+slash+blank+newline": multiline_comment
+  multiline_comment_close:
+    "c_ang_p": multiline_comment_final
+    "letter+number+ostring+ochar+rest_cdata+slash+blank+newline": multiline_comment
+    "minus": multiline_comment_close
   c_ang_p:
-    "o_ang_p+blank+newline": c_ang_p_final
+    "o_ang_p+blank+newline+end": c_ang_p_final
   cdata_init:
-    "letter+number+rest_cdata": cdata_init
+    "letter+number+rest_cdata+minus": cdata_init
     "blank+newline+slash+c_ang_p+slash": cdata_final
     "no_cdata": ascii_init
   ascii_init:
@@ -49,19 +70,27 @@ transitions:
     "number+no_cdata": quoted_ascii
     "letter": quoted_cdata
   quoted_cdata:
-    "letter+rest_cdata+blank": quoted_cdata
+    "letter+rest_cdata+blank+minus": quoted_cdata
     "no_cdata": quoted_ascii
     "ostring": quoted_cdata_final
   quoted_ascii:
     "letter+number+no_cdata": quoted_ascii
     "ostring": quoted_ascii_final
 semanticActions:
+  blank:
+    discard: true
+  newline:
+    discard: true  
   o_ang_p_final:
     token_id: "LESSER"
+    reset: true
+    clean: true
   c_ang_p_final:
     token_id: "BIGGER"
     reset: true
     clean: true
+  multiline_comment_final:
+    discard: true
   slash_final:
     token_id: "DIVISION"
   equal_final:
@@ -73,7 +102,7 @@ semanticActions:
   quoted_ascii:
     save_value: true
   quoted_init:
-    save_value: true
+    save_value: false
   quoted_cdata:
     save_value: true
   cdata_final:

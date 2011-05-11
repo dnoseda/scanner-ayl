@@ -36,7 +36,9 @@ public enum TokenType {
 			CDATA(81),
 			ASCII(82),
 			QUOTED_CDATA(83),
-			QUOTED_ASCII(84);
+			QUOTED_ASCII(84),
+			A_TAG_NAME(85),
+			HREF(86), PROFILE(87);
 
 	private int code;
 

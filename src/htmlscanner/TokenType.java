@@ -33,7 +33,10 @@ public enum TokenType {
 			HTML_TAG_NAME(78), 
 			HEAD_TAG_NAME(79), 
 			BODY_TAG_NAME(80),
-			CDATA(81);
+			CDATA(81),
+			ASCII(82),
+			QUOTED_CDATA(83),
+			QUOTED_ASCII(84);
 
 	private int code;
 

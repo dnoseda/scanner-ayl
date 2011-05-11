@@ -26,7 +26,6 @@ aliases:
   o_ang_p: "<"
   rest_cdata: "-_:."
   no_cdata: "{}[]()%|&^=+*"
-  end: "$"
 transitions:
   initial:
     o_ang_p: o_ang_p_final
@@ -38,7 +37,7 @@ transitions:
     "ostring": quoted_init
     $: end
   c_ang_p:
-    "o_ang_p+blank+newline+end": c_ang_p_final
+    "o_ang_p+blank+newline": c_ang_p_final
   cdata_init:
     "letter+number+rest_cdata": cdata_init
     "blank+newline+slash+c_ang_p+slash": cdata_final

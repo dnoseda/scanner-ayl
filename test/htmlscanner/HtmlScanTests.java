@@ -35,11 +35,17 @@ public class HtmlScanTests extends AutomatonTests {
 				new Token(TokenType.HTML_TAG_NAME, null),
 				new Token(TokenType.BIGGER, null)
 				);
+		printResult(result);
 		assertTrue(String.format("tokens esperado: %s\ntokens resultado: %s",
 				tokens, result.getTokens()), isEqual(result.getTokens(), tokens));
 	}
 
 	public void testCorrectHtmlWithBreaks() {
+		Automaton au = new Automaton();
+		au.init("htmlconf.yaml");
+
+		ScanResult result = au.scan("<HTML>\n<HEAD></HEAD>\n<BODY>\nAlgo de texto. \"Algo de quote text\"\n</BODY>\n</HTML>");
+		printResult(result);
 	}
 
 	public void testWrongHtmlNoBreaks() {

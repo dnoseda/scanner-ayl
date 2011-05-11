@@ -1,0 +1,6 @@
+<HTML>
+<HEAD></HEAD>
+<BODY>
+Algo de texto. "Algo de quote text"
+</BODY>
+</HTML>

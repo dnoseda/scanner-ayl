@@ -28,7 +28,7 @@ transitions:
   initial:
     letter: ident    
     number: int    
-    blank: sep
+    "blank+newline": sep
     ostring: string_prev
     ochar: char_prev
     slash: comment_init
@@ -78,7 +78,7 @@ transitions:
     "\"": string_final
   ident:
     "letter+number": ident
-    " .$\"'": ident_final    
+    " .$\"'+newline": ident_final    
   int:
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$\"'": int_final
     "1234567890": int
@@ -124,7 +124,7 @@ semanticActions:
     reset: true
     clean: true
   sep:
-    token_id: "SEP"
+    discard: true
   ident:
     save_value: true
   int:

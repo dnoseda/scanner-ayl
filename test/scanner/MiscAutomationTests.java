@@ -65,6 +65,6 @@ public class MiscAutomationTests extends AutomatonTests {
 	}
 	
 	public void testIdentLimit() throws Exception {
-		assertTokensAndError(token(TokenType.ID,"FUUUj1223lAq1j2z"), "FUUUj1223lAq1j2zFUUUj1223lAq1j2zFUUUj1223lAq1j2zFUUUj1223lAq1j2z");
+		assertTokens(token(TokenType.ID,"FUUUj1223lAq1j2z"), "FUUUj1223lAq1j2zFUUUj1223lAq1j2zFUUUj1223lAq1j2zFUUUj1223lAq1j2z");
 	}
 }

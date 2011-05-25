@@ -186,7 +186,11 @@ public class Automaton {
 														.get("limit"))));
 										int limit = (Integer) action
 												.get("limit");
-
+										if(limit< value.length()){
+											System.err.println(String.format(
+													"ERROR pos %d: Ident to long", pos));
+										}
+										
 										value = value
 												.substring(0, Math.min(
 														value.length(), limit));

@@ -188,7 +188,7 @@ public class Automaton {
 												.get("limit");
 										if(limit< value.length()){
 											System.err.println(String.format(
-													"ERROR pos %d: Ident to long", pos));
+													"ERROR pos %d: token exceed maximum length %d", pos, limit));
 										}
 										
 										value = value

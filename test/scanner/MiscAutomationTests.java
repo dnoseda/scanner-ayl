@@ -21,17 +21,16 @@ public class MiscAutomationTests extends AutomatonTests {
 	
 	public void testInt() throws Exception {
 		ScanResult result = scan("10 00 101");
-		List<Token> tokens = Arrays.asList(new Token(TokenType.ENTERO,"10"), new Token(TokenType.SEP,null),
-				new Token(TokenType.ENTERO,"00"), new Token(TokenType.SEP,null),
-				new Token(TokenType.ENTERO,"101"));
+		List<Token> tokens = Arrays.asList(new Token(TokenType.ENTERO,"10"),
+				new Token(TokenType.ENTERO,"00"), new Token(TokenType.ENTERO,"101"));
 		assertTrue(String.format("tokens esperado: %s\ntokens resultado: %s",tokens,result.tokens),isEqual(result.getTokens(),tokens));
 		System.out.println(result.tokens);
 	}
 	
 	public void testReal() throws Exception {
 		ScanResult result = scan("10 0.01 101");
-		List<Token> tokens = Arrays.asList(new Token(TokenType.ENTERO,"10"), new Token(TokenType.SEP,null),
-				new Token(TokenType.REAL,"0.01"), new Token(TokenType.SEP,null),
+		List<Token> tokens = Arrays.asList(new Token(TokenType.ENTERO,"10"),
+				new Token(TokenType.REAL,"0.01"),
 				new Token(TokenType.ENTERO,"101"));
 		assertTrue(String.format("tokens esperado: %s\ntokens resultado: %s",tokens,result.tokens),isEqual(result.getTokens(),tokens));
 		System.out.println(result.tokens);
@@ -57,12 +56,9 @@ public class MiscAutomationTests extends AutomatonTests {
 		printResult(result);
 		List<Token> expected =Arrays.asList(
 					new Token(TokenType.ID,"apo9231"),
-					new Token(TokenType.SEP,null),
 					new Token(TokenType.ENTERO,"1231"),
 					new Token(TokenType.ID,"assqe"),
-					new Token(TokenType.SEP,null),
 					new Token(TokenType.REAL,"2.3"),
-					new Token(TokenType.SEP,null),
 					new Token(TokenType.ID,"FUUUj1223lAq1j2z")
 				);
 		assertTrue(isEqual(expected ,result.tokens));

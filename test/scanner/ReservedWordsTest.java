@@ -17,7 +17,7 @@ public class ReservedWordsTest extends AutomatonTests {
 		ScanResult result = scan("class abstract ");
 		List<Token> tokens = Arrays.asList(new Token(TokenType.CLASS, null),
 				 new Token(TokenType.ABSTRACT,
-						null), new Token(TokenType.SEP, null));
+						null));
 		assertTrue(String.format("tokens esperado: %s\ntokens resultado: %s",
 				tokens, result.tokens), isEqual(result.getTokens(), tokens));
 		System.out.println(result.tokens);

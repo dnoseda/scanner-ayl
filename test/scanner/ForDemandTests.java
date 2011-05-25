@@ -22,13 +22,13 @@ public class ForDemandTests extends AutomatonTests {
 			result.add(t);
 		}
 		assert(isEqual(token(TokenType.REAL,"12.23")
-						.and(TokenType.SEP)
+						
 						.and(TokenType.ENTERO,"12314")
-						.and(TokenType.SEP)
+						
 						.and(TokenType.ID)
-						.and(TokenType.SEP)
+						
 						.and(TokenType.CARACTER,"a")
-						.and(TokenType.SEP)
+						
 						.and(TokenType.CADENA,"hola").build(), result));
 	}
 	public static void main(String[] args) {

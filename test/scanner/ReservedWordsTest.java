@@ -34,11 +34,11 @@ public class ReservedWordsTest extends AutomatonTests {
 			result.add(t);
 		}
 		assert (isEqual(
-				token(TokenType.CLASS, null).and(TokenType.SEP)
-						.and(TokenType.ABSTRACT).and(TokenType.SEP)
-						.and(TokenType.PUBLIC).and(TokenType.SEP)
-						.and(TokenType.EXTENDS).and(TokenType.SEP)
-						.and(TokenType.CARACTER, "a").and(TokenType.SEP)
+				token(TokenType.CLASS, null)
+						.and(TokenType.ABSTRACT)
+						.and(TokenType.PUBLIC)
+						.and(TokenType.EXTENDS)
+						.and(TokenType.CARACTER, "a")
 						.and(TokenType.CADENA, "hola").build(), result));
 	}
 }

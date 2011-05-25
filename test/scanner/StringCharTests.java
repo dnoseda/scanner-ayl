@@ -14,7 +14,7 @@ public class StringCharTests extends AutomatonTests {
 	}
 	
 	public void testStringAndIdent() throws Exception {
-		assertTokens(token(TokenType.ENTERO,"123").and(TokenType.SEP,null).and(TokenType.ID,"qwe12").and(TokenType.CADENA,"otro"), "123 qwe12\"otro\"");
+		assertTokens(token(TokenType.ENTERO,"123").and(TokenType.ID,"qwe12").and(TokenType.CADENA,"otro"), "123 qwe12\"otro\"");
 	}
 	
 	public void testChar() throws Exception {
@@ -28,11 +28,9 @@ public class StringCharTests extends AutomatonTests {
 		String input = "123 12.2'a' a123\"astring\"1'g'";
 		
 		assertTokens(
-				token(TokenType.ENTERO, "123")
-					.and(TokenType.SEP)
+				token(TokenType.ENTERO, "123")					
 					.and(TokenType.REAL, "12.2")
-					.and(TokenType.CARACTER, "a")
-					.and(TokenType.SEP)
+					.and(TokenType.CARACTER, "a")					
 					.and(TokenType.ID, "a123")
 					.and(TokenType.CADENA, "astring")
 					.and(TokenType.ENTERO, "1")

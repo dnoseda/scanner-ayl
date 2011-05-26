@@ -15,7 +15,7 @@ public enum TokenType {
 			MULTIPLICATION(60),
 			SUM(61),
 			DIFFERENCE(62),
-			ASSINGNATION(63),
+			ASSIGNATION(63),
 			POWER(64),
 			LOGIC_AND(65),
 			LOGIC_OR(66),

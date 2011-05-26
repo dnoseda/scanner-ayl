@@ -15,7 +15,7 @@ public class OperatorsTests extends AutomatonTests {
 				null),  new Token(
 				TokenType.SUMASSIGN, null), 
 				new Token(TokenType.SUM, null), 
-				new Token(TokenType.DIFFERENCE, null), new Token(TokenType.EQUAL, null),  new Token(TokenType.DIVISION,
+				new Token(TokenType.DIFFERENCE, null), new Token(TokenType.ASSINGNAMENT, null),  new Token(TokenType.DIVISION,
 						null),  new Token(
 						TokenType.MULTIPLICATION, null), new Token(TokenType.POWER, null),
 				 new Token(TokenType.LOGIC_AND,

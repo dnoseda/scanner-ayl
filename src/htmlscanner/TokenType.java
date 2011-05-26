@@ -15,7 +15,7 @@ public enum TokenType {
 			MULTIPLICATION(60),
 			SUM(61),
 			DIFFERENCE(62),
-			EQUAL(63),
+			ASSINGNATION(63),
 			POWER(64),
 			LOGIC_AND(65),
 			LOGIC_OR(66),
@@ -38,7 +38,7 @@ public enum TokenType {
 			QUOTED_CDATA(83),
 			QUOTED_ASCII(84),
 			A_TAG_NAME(85),
-			HREF(86), PROFILE(87),COMMA(88),SEMICOLON(89);
+			HREF(86), PROFILE(87),COMMA(88),SEMICOLON(89),EQUAL(90);
 
 	private int code;
 

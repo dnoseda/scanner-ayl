@@ -15,7 +15,7 @@ tokens:
   while: !htmlscanner.Token
     code: !htmlscanner.TokenType WHILE
   ==: !htmlscanner.Token
-    code: !htmlscanner.TokenType EQUAL
+    code: !htmlscanner.TokenType ASSIGNATION
   if: !htmlscanner.Token
     code: !htmlscanner.TokenType IF
   "]": !htmlscanner.Token

@@ -36,7 +36,7 @@ transitions:
     asterisk: multiplication
     plus: sum_init
     minus: difference
-    equal: equal
+    equal: assignation
     power: power
     logic_and: logic_and_prev
     logic_or: logic_or_prev
@@ -50,6 +50,9 @@ transitions:
     bigger: bigger
     lesser: lesser
     $: end
+  assignation:
+    =: equal
+    "!\"#$%&'()*+,-./0123456789:;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t": assignation_final
   logic_and_prev:
     logic_and: logic_and
   logic_or_prev:
@@ -88,7 +91,7 @@ transitions:
     "1234567890": real
   real:
     "1234567890": real
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.$+blank+newline+tab'/": real_final
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.$'/+blank+newline+tab": real_final
   sum_init:
     "letter+number+dot+blank+newline+tab": sum
     "=": sum_assign
@@ -156,6 +159,8 @@ semanticActions:
     token_id: "DIFFERENCE"
   equal:
     token_id: "EQUAL"
+  assignation_final:
+    token_id: "ASSIGNATION"
   power:
     token_id: "POWER"
   logic_and:

@@ -53,10 +53,19 @@ public class AllTokensJavaTest extends AutomatonTests {
 
 	public void testAllCombinations() throws Exception{
 		setLog(true);
-		@SuppressWarnings("unchecked")
-		Map<String,Object> conf = Yaml.loadType(new File("resources/tokens-java.yaml"), HashMap.class);
-		@SuppressWarnings("unchecked")
-		Map<String,Token> allTokens = (Map<String, Token>) conf.get("tokens");
+		
+		Map realconf = Yaml.loadType(new File("resources/tokens-java.yaml"), HashMap.class);
+		Map<String,Object> conf = Maps.newHashMap();
+		for(Object o: realconf.entrySet()){
+			Entry e =(Entry) o;
+			conf.put(String.valueOf(e.getKey()), e.getValue());
+		}
+		Map realTokens =(Map) conf.get("tokens");
+		Map<String,Token> allTokens = Maps.newHashMap();
+		for(Object o: realTokens.entrySet()){
+			Entry e =(Entry) o;
+			allTokens.put(String.valueOf(e.getKey()), (Token)e.getValue());
+		}
 		@SuppressWarnings("unchecked")
 		List<String> seps = (List<String>) conf.get("separators");
 		

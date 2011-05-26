@@ -38,7 +38,7 @@ public enum TokenType {
 			QUOTED_CDATA(83),
 			QUOTED_ASCII(84),
 			A_TAG_NAME(85),
-			HREF(86), PROFILE(87);
+			HREF(86), PROFILE(87),COMMA(88),SEMICOLON(89);
 
 	private int code;
 

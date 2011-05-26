@@ -26,6 +26,7 @@ aliases:
   lesser: "<"
   tab: "\t"
   comma: ","
+  semicolon: ";"
 transitions:
   initial:
     letter: ident    
@@ -51,6 +52,7 @@ transitions:
     bigger: bigger
     lesser: lesser
     comma: comma
+    semicolon: semicolon
     $: end
   assignation:
     =: equal
@@ -189,6 +191,8 @@ semanticActions:
     token_id: "LESSER"
   comma:
     token_id: "COMMA"
+  semicolon:
+    token_id: "SEMICOLON"
 reservedWords:
    abstract: "ABSTRACT"
    boolean: "BOOLEAN"

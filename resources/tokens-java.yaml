@@ -61,7 +61,7 @@ tokens:
   ";": !htmlscanner.Token
     code: !htmlscanner.TokenType SEMICOLON
   "}": !htmlscanner.Token
-    code: !htmlscanner.TokenType O_BRACE
+    code: !htmlscanner.TokenType C_BRACE
   "++": !htmlscanner.Token
     code: !htmlscanner.TokenType POSTINCREMENT
   "==": !htmlscanner.Token
@@ -71,8 +71,8 @@ tokens:
   ">": !htmlscanner.Token
     code: !htmlscanner.TokenType LESSER
   "{": !htmlscanner.Token
-    code: !htmlscanner.TokenType C_BRACE
+    code: !htmlscanner.TokenType O_BRACE
   "-": !htmlscanner.Token
     code: !htmlscanner.TokenType DIFFERENCE
-  "∗": !htmlscanner.Token
+  "*": !htmlscanner.Token
     code: !htmlscanner.TokenType MULTIPLICATION

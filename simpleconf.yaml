@@ -93,7 +93,7 @@ transitions:
     "1234567890": real
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.$'/+blank+newline+tab": real_final
   sum_init:
-    "letter+number+dot+blank+newline+tab": sum
+    "letter+number+dot+blank+newline+tab+$": sum
     "=": sum_assign
     plus: post_increment  
 semanticActions:

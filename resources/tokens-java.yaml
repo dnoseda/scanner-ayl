@@ -14,7 +14,7 @@ tokens:
     code: !htmlscanner.TokenType FLOAT
   while: !htmlscanner.Token
     code: !htmlscanner.TokenType WHILE
-  ==: !htmlscanner.Token
+  =: !htmlscanner.Token
     code: !htmlscanner.TokenType ASSIGNATION
   if: !htmlscanner.Token
     code: !htmlscanner.TokenType IF
@@ -64,7 +64,7 @@ tokens:
     code: !htmlscanner.TokenType O_BRACE
   "++": !htmlscanner.Token
     code: !htmlscanner.TokenType POSTINCREMENT
-  "=": !htmlscanner.Token
+  "==": !htmlscanner.Token
     code: !htmlscanner.TokenType EQUAL
   "<": !htmlscanner.Token
     code: !htmlscanner.TokenType BIGGER  

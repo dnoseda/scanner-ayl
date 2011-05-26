@@ -36,3 +36,43 @@ tokens:
     code: RETURN
   class: !htmlscanner.Token
     code: !htmlscanner.TokenType CLASS
+  +: !htmlscanner.Token
+    code: !htmlscanner.TokenType SUM
+  (: !htmlscanner.Token
+    code: !htmlscanner.TokenType O_P
+  ): !htmlscanner.Token
+    code: !htmlscanner.TokenType C_P
+  double: !htmlscanner.Token
+    code: !htmlscanner.TokenType DOUBLE
+  /: !htmlscanner.Token
+    code: !htmlscanner.TokenType DIVISION
+  ",": !htmlscanner.Token
+    code: !htmlscanner.TokenType COMMA  
+  new: !htmlscanner.Token
+    code: !htmlscanner.TokenType NEW
+  public: !htmlscanner.Token
+    code: !htmlscanner.TokenType PUBLIC
+  "\"ajhskjhd\"": !htmlscanner.Token
+    code: !htmlscanner.TokenType CADENA
+    value: ajhskjhd
+  "'s'": !htmlscanner.Token
+    code: !htmlscanner.TokenType CARACTER
+    value: s
+  ";": !htmlscanner.Token
+    code: !htmlscanner.TokenType SEMICOLON
+  "}": !htmlscanner.Token
+    code: !htmlscanner.TokenType O_BRACE
+  "++": !htmlscanner.Token
+    code: !htmlscanner.TokenType POSTINCREMENT
+  "=": !htmlscanner.Token
+    code: !htmlscanner.TokenType EQUAL
+  "<": !htmlscanner.Token
+    code: !htmlscanner.TokenType BIGGER  
+  ">": !htmlscanner.Token
+    code: !htmlscanner.TokenType LESSER
+  "{": !htmlscanner.Token
+    code: !htmlscanner.TokenType C_BRACE
+  "-": !htmlscanner.Token
+    code: !htmlscanner.TokenType DIFFERENCE
+  "∗": !htmlscanner.Token
+    code: !htmlscanner.TokenType MULTIPLICATION

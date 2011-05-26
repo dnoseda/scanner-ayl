@@ -78,6 +78,9 @@ public abstract class AutomatonTests extends TestCase {
 		assertFalse(result.errors.isEmpty());
 	}
 
+	protected TokenBuilder token(Token token){
+		return token(token.getCode(),token.getValue());
+	}
 	protected TokenBuilder token(TokenType key, String value) {
 		return new TokenBuilder(key, value);
 	}
@@ -92,6 +95,9 @@ public abstract class AutomatonTests extends TestCase {
 		TokenBuilder and(TokenType key, String value) {
 			tokens.add(new Token(key, value));
 			return this;
+		}
+		TokenBuilder and(Token token){
+			return and(token.getCode(),token.getValue());
 		}
 		TokenBuilder and(TokenType key){
 			return and(key,null);

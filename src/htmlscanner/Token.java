@@ -3,6 +3,10 @@ package htmlscanner;
 public class Token {
 	TokenType code;
 	String value;
+	public Token(){
+		code=null;
+		value=null;
+	}
 	public TokenType getCode() {
 		return code;	
 	}

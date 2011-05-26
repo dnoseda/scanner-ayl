@@ -1,0 +1,80 @@
+tokens:
+  "0.23": !htmlscanner.Token
+    code: !htmlscanner.TokenType REAL
+    value: "0.23"
+  "&&": !htmlscanner.Token
+    code: &4 !htmlscanner.TokenType LOGIC_AND
+  char: !htmlscanner.Token
+    code: !htmlscanner.TokenType CHAR
+  float: !htmlscanner.Token
+    code: !htmlscanner.TokenType FLOAT
+  while: !htmlscanner.Token
+    code: !htmlscanner.TokenType WHILE
+  ==: !htmlscanner.Token
+    code: !htmlscanner.TokenType EQUAL
+  if: !htmlscanner.Token
+    code: !htmlscanner.TokenType IF
+  "]": !htmlscanner.Token
+    code: !htmlscanner.TokenType C_BRACKET
+  "[": !htmlscanner.Token
+    code: !htmlscanner.TokenType O_BRACKET
+  else: !htmlscanner.Token
+    code: !htmlscanner.TokenType ELSE
+  int: !htmlscanner.Token
+    code: !htmlscanner.TokenType INT
+  "123": !htmlscanner.Token
+    code: !htmlscanner.TokenType ENTERO
+    value: "123"
+  iuo123: !htmlscanner.Token
+    code: !htmlscanner.TokenType ID
+    value: iuo123
+  return: !htmlscanner.Token
+    code: RETURN
+  class: !htmlscanner.Token
+    code: !htmlscanner.TokenType CLASS
+  +: !htmlscanner.Token
+    code: !htmlscanner.TokenType SUM
+  (: !htmlscanner.Token
+    code: !htmlscanner.TokenType O_P
+  ): !htmlscanner.Token
+    code: !htmlscanner.TokenType C_P
+  double: !htmlscanner.Token
+    code: !htmlscanner.TokenType DOUBLE
+  /: !htmlscanner.Token
+    code: !htmlscanner.TokenType DIVISION
+  ",": !htmlscanner.Token
+    code: !htmlscanner.TokenType COMMA
+  -: !htmlscanner.Token
+    code: !htmlscanner.TokenType DIFFERENCE
+  ∗: !htmlscanner.Token
+    code: !htmlscanner.TokenType MULTIPLICATION
+  new: !htmlscanner.Token
+    code: !htmlscanner.TokenType NEW
+  "\"ajhskjhd\"": !htmlscanner.Token
+    code: !htmlscanner.TokenType CADENA
+    value: ajhskjhd
+  "'s'": !htmlscanner.Token
+    code: !htmlscanner.TokenType CARACTER
+    value: s
+  ;: !htmlscanner.Token
+    code: !htmlscanner.TokenType SEMICOLON
+  "}": !htmlscanner.Token
+    code: !htmlscanner.TokenType O_BRACE
+  ++: !htmlscanner.Token
+    code: !htmlscanner.TokenType POSTINCREMENT
+  =: !htmlscanner.Token
+    code: !htmlscanner.TokenType EQUAL
+  <: !htmlscanner.Token
+    code: !htmlscanner.TokenType BIGGER
+  public: !htmlscanner.Token
+    code: !htmlscanner.TokenType PUBLIC
+  >: !htmlscanner.Token
+    code: !htmlscanner.TokenType LESSER
+  "{": !htmlscanner.Token
+    code: !htmlscanner.TokenType C_BRACE
+
+separators:
+  - " "
+  - "\t"
+  - "\n"
+

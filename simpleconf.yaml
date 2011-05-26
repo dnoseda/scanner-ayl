@@ -24,11 +24,12 @@ aliases:
   percentage: "%"
   bigger: ">"
   lesser: "<"
+  tab: "\t"
 transitions:
   initial:
     letter: ident    
     number: int    
-    "blank+newline": sep
+    "blank+newline+tab": sep
     ostring: string_prev
     ochar: char_prev
     slash: comment_init
@@ -78,18 +79,18 @@ transitions:
     "\"": string_final
   ident:
     "letter+number": ident
-    " .$\"'+newline": ident_final    
+    " .$\"'+blank+newline+tab": ident_final    
   int:
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$\"'": int_final
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$\"'+blank+newline+tab": int_final
     "1234567890": int
     .: real_aux
   real_aux:
     "1234567890": real
   real:
     "1234567890": real
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .$'/": real_final
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.$+blank+newline+tab'/": real_final
   sum_init:
-    "letter+number+dot+blank": sum
+    "letter+number+dot+blank+newline+tab": sum
     "=": sum_assign
     plus: post_increment  
 semanticActions:

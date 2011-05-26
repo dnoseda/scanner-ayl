@@ -69,13 +69,16 @@ public class AllTokensJavaTest extends AutomatonTests {
 		@SuppressWarnings("unchecked")
 		List<String> seps = (List<String>) conf.get("separators");
 		
+		int total = allTokens.size() * allTokens.size() * seps.size();
+		int testNumber = 0;
 		for(Entry<String, Token> entryFirst : allTokens.entrySet()){
-			String sep = seps.get(RandomUtils.nextInt(seps.size()));
-			for(Entry<String, Token> entrySecond : allTokens.entrySet()){
-				Token first = entryFirst.getValue(), second = entrySecond.getValue();
-				String input = StringUtils.join(Arrays.asList(entryFirst.getKey(), sep, entrySecond.getKey()), "");
-				System.out.println(String.format("TESTING cadena \"%s\" y tokens %s",input,Arrays.asList(first,second)));
-				assertTokens(token(first).and(second), input);
+			for(String sep: seps){
+				for(Entry<String, Token> entrySecond : allTokens.entrySet()){
+					Token first = entryFirst.getValue(), second = entrySecond.getValue();
+					String input = StringUtils.join(Arrays.asList(entryFirst.getKey(), sep, entrySecond.getKey()), "");
+					System.out.println(String.format("[%d of %d] TESTING cadena \"%s\" y tokens %s",++testNumber, total, input,Arrays.asList(first,second)));
+					assertTokens(token(first).and(second), input);
+				}
 			}
 		}
 		

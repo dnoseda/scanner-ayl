@@ -64,7 +64,7 @@ transitions:
   comment_init:
     slash: comment_line
     asterisk: multi_comment
-    "letter+number+dot+blank+$": division_final
+    "letter+number+dot+blank+newline+tab+$": division_final
   comment_line:
     "letter+number+dot+blank": comment_line
     "newline+$": comment_line_final

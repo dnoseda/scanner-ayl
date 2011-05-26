@@ -67,9 +67,9 @@ tokens:
   "==": !htmlscanner.Token
     code: !htmlscanner.TokenType EQUAL
   "<": !htmlscanner.Token
-    code: !htmlscanner.TokenType BIGGER  
-  ">": !htmlscanner.Token
     code: !htmlscanner.TokenType LESSER
+  ">": !htmlscanner.Token
+    code: !htmlscanner.TokenType BIGGER 
   "{": !htmlscanner.Token
     code: !htmlscanner.TokenType O_BRACE
   "-": !htmlscanner.Token

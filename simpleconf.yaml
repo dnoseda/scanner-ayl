@@ -1,5 +1,6 @@
 aliases:
   all_chars: "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t"
+  all_chars_no_ochar: "!\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t"
   letter: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
   number: 1234567890
   ostring: "\""
@@ -78,7 +79,8 @@ transitions:
   char_prev:
     "letter+number+blank+dot+ostring": char
   char:
-    "'": char_final  
+    "'": char_final
+    all_chars_no_ochar: char_error 
   string_prev:
     "letter+number+dot+blank": string
   string:

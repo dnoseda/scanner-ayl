@@ -137,7 +137,8 @@ public class Automaton {
 	public void setInputToScan(String string) {
 		inputToScan = string;
 	}
-
+	int column = 0;
+	int line = 0;
 	public Token getNextToken() {
 		try {
 			while (pos <= inputToScan.length()) {
@@ -147,6 +148,13 @@ public class Automaton {
 					index = '$'; // end of file
 					pos++;
 				}
+				
+				if(index == '\n'){
+					line++;
+					column = 0;
+				}else{
+					column++;
+				}
 				Preconditions.checkState(transitions.containsKey(state),
 						"can't find state %s in settings", state);
 				String nextState = transitions.get(state).get(index);
@@ -154,7 +162,7 @@ public class Automaton {
 						index, nextState));
 				if (nextState == null) {
 					return new Token(TokenType.ERROR, String.format(
-							"ERROR pos %d", pos));
+							"ERROR pos %d (%d,%d)", pos, line, column));
 				} else {
 					state = nextState;
 					if (semanticActions.containsKey(state)) {

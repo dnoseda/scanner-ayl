@@ -26,7 +26,7 @@ aliases:
   c_ang_p: ">"
   o_ang_p: "<"
   rest_cdata: "_:."
-  no_cdata: "{}[]()%|&^=+*!?"
+  no_cdata: "{}[]()%|&^+*!?"
   end: "$"
 transitions:
   initial:
@@ -61,7 +61,7 @@ transitions:
     "o_ang_p+blank+newline+end": c_ang_p_final
   cdata_init:
     "letter+number+rest_cdata+minus": cdata_init
-    "blank+newline+slash+c_ang_p+slash": cdata_final
+    "blank+newline+slash+c_ang_p+slash+$": cdata_final
     "no_cdata": ascii_init
   ascii_init:
     "letter+number+no_cdata": ascii_init

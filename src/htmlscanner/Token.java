@@ -62,5 +62,8 @@ public class Token {
 			return false;
 		return true;
 	}
+	String prettyPrint(){
+		return String.format("(%s, %s)",code.getIntCode(),(value != null ? value : ""));
+	}
 	
 }

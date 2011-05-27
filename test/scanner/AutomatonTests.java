@@ -32,12 +32,15 @@ public abstract class AutomatonTests extends TestCase {
 		allLetters += allLetters.toUpperCase();
 	}
 
-	public ScanResult scan(String input) {
+	public ScanResult scan(String input,String confFile) {
 		Automaton au = new Automaton();
-		au.init("simpleconf.yaml");
+		au.init(confFile);
 
 		ScanResult result = au.scan(input);
 		return result;
+	}
+	public ScanResult scan(String input) {
+		return scan(input,"simpleconf.yaml");
 	}
 
 	public static boolean isEqual(List<Token> tokens, List<Token> tokens2) {
@@ -60,8 +63,11 @@ public abstract class AutomatonTests extends TestCase {
 		return true;
 	}
 
-	protected void assertTokens(TokenBuilder expected, String input) {
-		ScanResult result = scan(input);
+	protected void assertTokens(TokenBuilder expected, String input){
+		assertTokens(expected,input,"simpleconf.yaml");
+	}
+	protected void assertTokens(TokenBuilder expected, String input, String fileName) {
+		ScanResult result = scan(input,fileName);
 		printResult(result);
 		assertTrue(String.format("expected: %s and current %s",
 				expected.build(), result.tokens),

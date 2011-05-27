@@ -7,7 +7,9 @@ tokens:
     code: !htmlscanner.TokenType REAL
     value: "0.23"
   "&&": !htmlscanner.Token
-    code: &4 !htmlscanner.TokenType LOGIC_AND
+    code: !htmlscanner.TokenType LOGIC_AND
+  "||": !htmlscanner.Token
+    code: !htmlscanner.TokenType LOGIC_OR
   char: !htmlscanner.Token
     code: !htmlscanner.TokenType CHAR
   float: !htmlscanner.Token

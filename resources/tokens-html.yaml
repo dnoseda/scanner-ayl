@@ -1,0 +1,37 @@
+"\"123 . aqwdqw\"": !htmlscanner.Token
+  code: !htmlscanner.TokenType QUOTED_ASCII
+  value: 123aqwdqw
+A: !htmlscanner.Token
+  code: !htmlscanner.TokenType A_TAG_NAME
+qwiueqwiy12iuo21oiu31221..w:  !htmlscanner.Token
+  code: !htmlscanner.TokenType CDATA
+  value: qwiueqwiy12iuo21oiu31221..w
+class: !htmlscanner.Token
+  code: !htmlscanner.TokenType CLASS
+/: !htmlscanner.Token
+  code: !htmlscanner.TokenType DIVISION
+HEAD: !htmlscanner.Token
+  code: !htmlscanner.TokenType HEAD_TAG_NAME
+title: !htmlscanner.Token
+  code: !htmlscanner.TokenType TITLE
+BODY: !htmlscanner.Token
+  code: !htmlscanner.TokenType BODY_TAG_NAME
+P: !htmlscanner.Token
+  code: !htmlscanner.TokenType P_TAG_NAME
+HTML: !htmlscanner.Token
+  code: !htmlscanner.TokenType HTML_TAG_NAME
+<!-- lkajslkdjoqwieu: !htmlscanner.Token
+  code: !htmlscanner.TokenType CDATA
+  value: qwiueqwiy12iuo21oiu31221..w
+>: !htmlscanner.Token
+  code: !htmlscanner.TokenType BIGGER
+href: !htmlscanner.Token
+  code: !htmlscanner.TokenType HREF
+=: !htmlscanner.Token
+  code: !htmlscanner.TokenType EQUAL
+<: !htmlscanner.Token
+  code: !htmlscanner.TokenType LESSER
+profile: !htmlscanner.Token
+  code: !htmlscanner.TokenType PROFILE
+TITLE: !htmlscanner.Token
+  code: !htmlscanner.TokenType TITLE_TAG_NAME

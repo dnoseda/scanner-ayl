@@ -160,7 +160,7 @@ public class Automaton {
 				deltaExec.add(String.format("Delta(%S, '%c') = %S", state,
 						index, nextState));
 				if (nextState == null) {
-					return new Token(TokenType.ERROR, String.format(
+					return new Token(TokenType.ERROR_GENERICO,null, String.format(
 							"ERROR pos %d (%d,%d)", pos, line, column));
 				} else {
 					state = nextState;
@@ -220,6 +220,10 @@ public class Automaton {
 									cleanTemp();
 								}
 								execEpsilon();
+								if(token.getCode().toString().toUpperCase().contains("ERROR")){
+									token.setPos(String.format(
+											"ERROR pos %d (%d,%d)", pos, line, column));
+								}
 								return token;
 							}
 						}

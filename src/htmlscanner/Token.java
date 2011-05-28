@@ -3,6 +3,13 @@ package htmlscanner;
 public class Token {
 	TokenType code;
 	String value;
+	String pos;
+	public String getPos() {
+		return pos;
+	}
+	public void setPos(String pos) {
+		this.pos = pos;
+	}
 	public Token(){
 		code=null;
 		value=null;
@@ -24,7 +31,8 @@ public class Token {
 	}
 	@Override
 	public String toString() {
-		return "Token [code=" + code + " ("+code.getIntCode()+"), value='" + value + "']";
+		String pso = code.toString().toUpperCase().contains("ERROR") ? ", " + pos : "";
+		return "Token [code=" + code + " ("+code.getIntCode()+"), value='" + value + "'"+pso+"]";
 	}
 	public Token(TokenType code, String value) {
 		this.code = code;
@@ -32,6 +40,10 @@ public class Token {
 	}
 	public Token(TokenType code) {
 		this(code,null);
+	}
+	public Token(TokenType code, String value, String pos) {
+		this(code,value);
+		this.pos = pos;
 	}
 	@Override
 	public int hashCode() {

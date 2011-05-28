@@ -1,5 +1,8 @@
 aliases:
   all_chars: "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t"
+  all_chars_minus_asterisk: "!\"#$%&'()+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t"
+  all_chars_minus_number_or_dot: "!\"#$%&'()*+,-/:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t"
+  all_chars_minus_number: "!\"#$%&'()*+,-./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t"
   all_chars_minus_ostring_newline: "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \t"
   all_chars_minus_alfa: "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ \n\t"
   all_chars_no_ochar: "!\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \t"
@@ -72,7 +75,7 @@ transitions:
     "letter+number+dot+blank": comment_line
     "newline+$": comment_line_final
   multi_comment:
-    "letter+number+dot+newline+slash+blank": multi_comment
+    "all_chars_minus_asterisk": multi_comment
     asterisk: multi_comment_final_prev
   multi_comment_final_prev:
      "letter+number+dot+newline+blank": multi_comment
@@ -94,14 +97,14 @@ transitions:
     "letter+number": ident
     "all_chars_minus_alfa": ident_final
   int:
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$\"'+blank+newline+tab": int_final
+    "all_chars_minus_number_or_dot": int_final
     "1234567890": int
     .: real_aux
   real_aux:
     "1234567890": real
   real:
     "1234567890": real
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.$'/+blank+newline+tab": real_final
+    "all_chars_minus_number": real_final
   sum_init:
     "letter+number+dot+blank+newline+tab+$": sum
     "=": sum_assign

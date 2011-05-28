@@ -137,8 +137,8 @@ public class Automaton {
 	public void setInputToScan(String string) {
 		inputToScan = string;
 	}
-	int column = 0;
-	int line = 0;
+	int column = 1;
+	int line = 1;
 	public Token getNextToken() {
 		try {
 			while (pos <= inputToScan.length()) {
@@ -148,10 +148,9 @@ public class Automaton {
 					index = '$'; // end of file
 					pos++;
 				}
-				
 				if(index == '\n'){
 					line++;
-					column = 0;
+					column = 1;
 				}else{
 					column++;
 				}

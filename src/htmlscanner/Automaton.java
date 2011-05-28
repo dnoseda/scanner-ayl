@@ -95,6 +95,13 @@ public class Automaton {
 	public void goBack() {
 		// volver el puntero 1 para atras
 		pos--;
+		if(column>0){
+			column--;
+		}
+		if(column == 0){
+			column = 1;
+			line--;
+		}
 	}
 
 	public void cleanTemp() {
@@ -139,21 +146,24 @@ public class Automaton {
 	}
 	int column = 1;
 	int line = 1;
+	char prev = ' ';
 	public Token getNextToken() {
 		try {
 			while (pos <= inputToScan.length()) {
 				if (pos < inputToScan.length()) {
 					index = inputToScan.charAt(pos++);
 				} else {
-					index = '$'; // end of file
+					index = '¶'; // end of file
 					pos++;
 				}
-				if(index == '\n'){
+				
+				if(prev == '\n'){
 					line++;
 					column = 1;
 				}else{
 					column++;
 				}
+				prev = index;
 				Preconditions.checkState(transitions.containsKey(state),
 						"can't find state %s in settings", state);
 				String nextState = transitions.get(state).get(index);

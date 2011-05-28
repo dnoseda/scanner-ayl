@@ -59,10 +59,10 @@ transitions:
     lesser: lesser
     comma: comma
     semicolon: semicolon
-    $: end
+    ¶: end
   assignation:
     =: equal
-    "!\"#$%&'()*+,-./0123456789:;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t": assignation_final
+    "!\"#¶%&'()*+,-./0123456789:;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t": assignation_final
   logic_and_prev:
     logic_and: logic_and
   logic_or_prev:
@@ -70,10 +70,10 @@ transitions:
   comment_init:
     slash: comment_line
     asterisk: multi_comment
-    "letter+number+dot+blank+newline+tab+$": division_final
+    "letter+number+dot+blank+newline+tab+¶": division_final
   comment_line:
     "letter+number+dot+blank": comment_line
-    "newline+$": comment_line_final
+    "newline+¶": comment_line_final
   multi_comment:
     "all_chars_minus_asterisk": multi_comment
     asterisk: multi_comment_final_prev
@@ -106,7 +106,7 @@ transitions:
     "1234567890": real
     "all_chars_minus_number": real_final
   sum_init:
-    "letter+number+dot+blank+newline+tab+$": sum
+    "letter+number+dot+blank+newline+tab+¶": sum
     "=": sum_assign
     plus: post_increment  
 semanticActions:
@@ -126,7 +126,7 @@ semanticActions:
   char_error:
     token_id: "CARACTER_ERROR"
     have_value: true
-    reset: false
+    reset: true
     clean: true
   char_final:
     token_id: "CARACTER"

@@ -18,3 +18,17 @@ String[] arr = new String[]();
 if(true && 1==2){
 	i++;
 }
+
+char c = 'aasdqwe';
+char j = 'a
+';
+
+String nocierro = "kjakjskas
+
+lkkjalsl";
+
+/* comentario con cualqueir caracer~~~~.s/
+*/
+
+
+/* comentario que no cierra

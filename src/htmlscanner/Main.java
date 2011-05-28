@@ -41,6 +41,7 @@ public class Main {
 			while((t=au.getNextToken())!=null){
 				str.append(t).append("\n");
 			}
+			System.out.println(StringUtils.join(au.getDeltaExec(),"\n"));
 			
 			FileUtils.writeStringToFile(new File("salida.tok"), str.toString());
 		} catch (IOException e) {

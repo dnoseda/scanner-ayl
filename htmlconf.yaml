@@ -43,7 +43,7 @@ transitions:
     $: end
   o_ang_p:
     "bang": multiline_comment_init
-    "letter+slash": o_ang_p_final
+    "letter+slash+end": o_ang_p_final
   multiline_comment_init:
     "minus": multiline_comment_prev
   multiline_comment_prev:

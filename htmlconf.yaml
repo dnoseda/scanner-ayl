@@ -27,9 +27,9 @@ aliases:
   c_ang_p: ">"
   o_ang_p: "<"
   rest_cdata: "_:."
-  no_cdata: "{}[]()%|&^+*!?"
+  no_cdata: "{}[]()%|&^+*!?$"
   tab: "\t"
-  end: "$"
+  end: "¶"
 transitions:
   initial:
     o_ang_p: o_ang_p
@@ -41,7 +41,7 @@ transitions:
     "ostring": quoted_init
     "newline": newline
     "blank+tab": blank
-    $: end
+    ¶: end
   o_ang_p:
     "bang": multiline_comment_init
     "all_chars_minus_bang": o_ang_p_final
@@ -63,7 +63,7 @@ transitions:
     "o_ang_p+blank+newline+end+tab+letter+number": c_ang_p_final
   cdata_init:
     "letter+number+rest_cdata+minus": cdata_init
-    "blank+newline+slash+c_ang_p+$+tab+blank+o_ang_p": cdata_final
+    "blank+newline+slash+c_ang_p+¶+tab+blank+o_ang_p": cdata_final
     "no_cdata": ascii_init
   ascii_init:
     "letter+number+no_cdata": ascii_init
@@ -75,11 +75,11 @@ transitions:
     "letter+rest_cdata+blank+minus+number+tab": quoted_cdata
     "no_cdata+blank+tab": quoted_ascii
     "ostring": quoted_cdata_final
-    "newline+$": quoted_cdata_error
+    "newline+¶": quoted_cdata_error
   quoted_ascii:
     "letter+number+no_cdata+blank+tab+dot": quoted_ascii
     "ostring": quoted_ascii_final
-    "newline+$": quoted_ascii_error
+    "newline+¶": quoted_ascii_error
 semanticActions:
   blank:
     discard: true

@@ -145,7 +145,7 @@ public class Automaton {
 				if (pos < inputToScan.length()) {
 					index = inputToScan.charAt(pos++);
 				} else {
-					index = '$'; // end of file
+					index = '¶'; // end of file
 					pos++;
 				}
 				if(index == '\n'){

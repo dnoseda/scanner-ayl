@@ -73,9 +73,9 @@ transitions:
     "letter": quoted_cdata
   quoted_cdata:
     "letter+rest_cdata+blank+minus+number+tab": quoted_cdata
-    "no_cdata": quoted_ascii
+    "no_cdata+blank+tab": quoted_ascii
     "ostring": quoted_cdata_final
-    "newline+$+blank+tab": quoted_cdata_error
+    "newline+$": quoted_cdata_error
   quoted_ascii:
     "letter+number+no_cdata+blank+tab+dot": quoted_ascii
     "ostring": quoted_ascii_final
@@ -126,6 +126,16 @@ semanticActions:
     clean: true
   quoted_cdata_final:
     token_id: "QUOTED_CDATA"
+    have_value: true
+    reset: false
+    clean: true
+  quoted_cdata_error:
+    token_id: "ERROR_QUOTE_CDATA"
+    have_value: true
+    reset: false
+    clean: true
+  quoted_ascii_error:
+    token_id: "ERROR_QUOTE_ASCII"
     have_value: true
     reset: false
     clean: true

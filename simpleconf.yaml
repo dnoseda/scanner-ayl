@@ -82,7 +82,8 @@ transitions:
     all_chars_no_ochar: char
   char:
     "'": char_final
-    all_chars_no_ochar: char_error 
+    all_chars_no_ochar: char_error
+    newline: generic_error
   string_prev:
    all_chars_minus_ostring_newline: string
   string:
@@ -113,6 +114,10 @@ semanticActions:
   string_incomplette_final:
     token_id: "CADENA_INCOMPLETA_ERROR"
     have_value: true
+    reset: false
+    clean: true
+  generic_error:
+    token_id: "ERROR_GENERICO"
     reset: false
     clean: true
   char_error:

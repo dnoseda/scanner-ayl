@@ -1,5 +1,6 @@
 aliases:
   all_chars: "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t"
+  all_chars_minus_alfa: "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ \n\t"
   all_chars_no_ochar: "!\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ \n\t"
   letter: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
   number: 1234567890
@@ -89,7 +90,7 @@ transitions:
     "\n": string_incomplette_final
   ident:
     "letter+number": ident
-    " .$\"'+blank+newline+tab": ident_final    
+    "all_chars_minus_alfa": ident_final
   int:
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$\"'+blank+newline+tab": int_final
     "1234567890": int

@@ -27,6 +27,7 @@ aliases:
   o_ang_p: "<"
   rest_cdata: "_:."
   no_cdata: "{}[]()%|&^+*!?"
+  tab: "\t"
   end: "$"
 transitions:
   initial:
@@ -72,9 +73,9 @@ transitions:
   quoted_cdata:
     "letter+rest_cdata+blank+minus": quoted_cdata
     "no_cdata": quoted_ascii
-    "ostring": quoted_cdata_final
+    "ostring+no_cdata+blank+tab": quoted_cdata_final
   quoted_ascii:
-    "letter+number+no_cdata": quoted_ascii
+    "letter+number+no_cdata+blank+tab+dot": quoted_ascii
     "ostring": quoted_ascii_final
 semanticActions:
   blank:

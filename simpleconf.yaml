@@ -86,6 +86,7 @@ transitions:
   string:
     "letter+number+dot+blank": string
     "\"": string_final
+    "\n": string_incomplette_final
   ident:
     "letter+number": ident
     " .$\"'+blank+newline+tab": ident_final    
@@ -107,6 +108,11 @@ semanticActions:
     discard: true
   multi_comment_final:
     discard: true  
+  string_incomplette_final:
+    token_id: "CADENA_INCOMPLETA_ERROR"
+    have_value: true
+    reset: false
+    clean: true
   char_final:
     token_id: "CARACTER"
     have_value: true

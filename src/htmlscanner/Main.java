@@ -2,6 +2,7 @@ package htmlscanner;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -29,19 +30,20 @@ public class Main {
 	public static void main(String[] args) {
 		Automaton au = new Automaton();
 		au.init(args[0]);
+		boolean pretty = Arrays.asList(args).contains("-pretty");
 		/**/
 		String input;
 		try {
-			
 			input = FileUtils.readFileToString(new File(args[1]));
 			au.setInputToScan(input);
 			Token t = null;
-			List<Token> result = Lists.newArrayList();
 			StringBuilder str = new StringBuilder();
 			while((t=au.getNextToken())!=null){
-				str.append(t).append("\n");
+				str.append(pretty ? t : t.prettyPrint()).append("\n");
 			}
-			System.out.println(StringUtils.join(au.getDeltaExec(),"\n"));
+			if(pretty){
+				System.out.println(StringUtils.join(au.getDeltaExec(),"\n"));
+			}
 			
 			FileUtils.writeStringToFile(new File("salida.tok"), str.toString());
 		} catch (IOException e) {

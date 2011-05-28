@@ -39,7 +39,7 @@ public class Main {
 			List<Token> result = Lists.newArrayList();
 			StringBuilder str = new StringBuilder();
 			while((t=au.getNextToken())!=null){
-				str.append(t.prettyPrint()).append("\n");
+				str.append(t).append("\n");
 			}
 			
 			FileUtils.writeStringToFile(new File("salida.tok"), str.toString());

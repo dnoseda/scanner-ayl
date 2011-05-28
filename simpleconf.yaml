@@ -113,6 +113,11 @@ semanticActions:
     have_value: true
     reset: false
     clean: true
+  char_error:
+    token_id: "CARACTER_ERROR"
+    have_value: true
+    reset: false
+    clean: true
   char_final:
     token_id: "CARACTER"
     have_value: true
